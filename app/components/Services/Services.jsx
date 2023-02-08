@@ -17,9 +17,9 @@ const Services = ({slider}) => {
     let servicesPage = useRef(null)
     const servicePageScroll = () => {
         requestAnimationFrame(() => {
-            serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
-            serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
-            serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
+            serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 20)}%) scale(1.2)`
+            serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 20)}%) scale(1.2)`
+            serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 20)}%) scale(1.2)`
         })
     }
     useEffect(() => {
@@ -49,13 +49,13 @@ const Services = ({slider}) => {
                 <h2 className="absolute top-[0%]">services</h2>
                 <div className="flex flex-col h-full pt-16 px-2 gap-2">
                     <div ref={serviceImageWrapper1} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
-                        <Image ref={serviceImage1} src={service_Image1} alt="hair care" className='relative left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.4]'/>
+                        <Image ref={serviceImage1} src={service_Image1} alt="hair care" className='relative duration-300 left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.2]'/>
                     </div>
                     <div ref={serviceImageWrapper2} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
-                        <Image ref={serviceImage2} src={service_Image2} alt="hair care" className='relative left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.4]'/>
+                        <Image ref={serviceImage2} src={service_Image2} alt="hair care" className='relative duration-300 left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.2]'/>
                     </div>
                     <div ref={serviceImageWrapper3} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
-                        <Image ref={serviceImage3} src={service_Image3} alt="hair care" className='relative left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.4]'/>
+                        <Image ref={serviceImage3} src={service_Image3} alt="hair care" className='relative left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.2]'/>
                     </div>
                 </div>
             </div>
