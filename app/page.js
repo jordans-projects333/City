@@ -7,26 +7,23 @@ import Footer from "./components/Footer"
 import { useRef } from "react"
 
 export default function App() {
-  let servicesInView = useRef(false)
   let slider = useRef(null)
   let imageWrapper = useRef(null)
   let originalPosition = useRef(null)
   let currentPosition = useRef(null)
-  let serviceImage2 = useRef(null)
-  let servicesPage = useRef(null)
   const elementsStart = (e) => {
     originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
   }
   const elementsMove = (e) => {
     // service image paralax
-    if(servicesInView){
-      requestAnimationFrame(() => {
-        console.log('eeaaaa')
-        // serviceImage2.current.style.transfrom = `translate(50% ${50+(servicesPage.current.getBoundingClientRect().top/window.innerHeight * 10)}%)`
-        serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
-      })
-    }
+    // if(servicesInView){
+    //   requestAnimationFrame(() => {
+    //     console.log('eeaaaa')
+    //     // serviceImage2.current.style.transfrom = `translate(50% ${50+(servicesPage.current.getBoundingClientRect().top/window.innerHeight * 10)}%)`
+    //     serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
+    //   })
+    // }
     // moving elements
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     let distancey = (currentPosition.current[1] - originalPosition.current[1])
@@ -45,7 +42,7 @@ export default function App() {
       <Header/>
       <div ref={slider} className="relative top-0 left-0 overflow-x-hidden" onTouchStart={(e) => elementsStart(e)} onTouchMove={(e) => elementsMove(e)} onTouchEnd={() => elementsEnd()}>
         <Home imageWrapper={imageWrapper} originalPosition={originalPosition} currentPosition={currentPosition}/>
-        <Services slider={slider} servicesInView={servicesInView} servicesPage={servicesPage} serviceImage2={serviceImage2}/>
+        <Services slider={slider}/>
         <Products/>
         <Footer/>
       </div>

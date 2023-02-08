@@ -3,22 +3,37 @@ import { useRef, useEffect } from "react"
 import Showcase from "./Showcase"
 import Image from "next/image"
 import service_Image2 from '../../images/services_2.jpg'
+import service_Image1 from '../../images/services_1.webp'
+import service_Image3 from '../../images/services_3.jpg'
 
-const Services = ({slider, servicesInView, serviceImage2, servicesPage}) => {
+const Services = ({slider}) => {
+    let serviceImageWrapper1 = useRef(null)
     let serviceImageWrapper2 = useRef(null)
+    let serviceImageWrapper3 = useRef(null)
+    let serviceImage1 = useRef(null)
+    let serviceImage2 = useRef(null)
+    let serviceImage3 = useRef(null)
     let showcase = useRef(null)
+    let servicesPage = useRef(null)
+    const servicePageScroll = () => {
+        requestAnimationFrame(() => {
+            serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
+            serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
+            serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
+        })
+    }
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if(entry.isIntersecting){
-                    servicesInView.current = true
+                    window.addEventListener('scroll', servicePageScroll)
                 }else{
-                    servicesInView.current = false
+                    window.removeEventListener('scroll', servicePageScroll)
                 }
             })
         })
-        observer.observe(serviceImage2.current)
-    }, [serviceImage2])
+        observer.observe(servicesPage.current)
+    }, [servicesPage])
     const showcaseIn = () => {
         console.log(showcase.current)
         requestAnimationFrame(() => {
@@ -32,12 +47,16 @@ const Services = ({slider, servicesInView, serviceImage2, servicesPage}) => {
             <Showcase showcase={showcase} slider={slider}/>
             <div ref={servicesPage} className="svh relative border-2 border-purple-500">
                 <h2 className="absolute top-[0%]">services</h2>
-                <div className="flex flex-col h-full pt-16">
-                    <div className="flex-1 border border-emerald-500" onClick={() => showcaseIn()}></div>
+                <div className="flex flex-col h-full pt-16 px-2 gap-2">
+                    <div ref={serviceImageWrapper1} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
+                        <Image ref={serviceImage1} src={service_Image1} alt="hair care" className='relative left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.4]'/>
+                    </div>
                     <div ref={serviceImageWrapper2} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
                         <Image ref={serviceImage2} src={service_Image2} alt="hair care" className='relative left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.4]'/>
                     </div>
-                    <div className="flex-1 border border-emerald-500"></div>
+                    <div ref={serviceImageWrapper3} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
+                        <Image ref={serviceImage3} src={service_Image3} alt="hair care" className='relative left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-auto scale-[1.4]'/>
+                    </div>
                 </div>
             </div>
         </>
