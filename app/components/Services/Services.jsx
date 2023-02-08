@@ -8,6 +8,7 @@ const Services = ({slider}) => {
         console.log(showcase.current)
         requestAnimationFrame(() => {
             showcase.current.style.left = 0
+            slider.current.style.transitionDuration = '800ms'
             slider.current.style.left = '-100%'
         })
     }

@@ -4,6 +4,7 @@ const Showcase = ({showcase, slider}) => {
     const showcaseOut = () => {
         requestAnimationFrame(() => {
             showcase.current.style.left = '100%'
+            slider.current.style.transitionDuration = '200ms'
             slider.current.style.left = 0
         })
     }

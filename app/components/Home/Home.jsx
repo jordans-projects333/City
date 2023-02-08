@@ -1,27 +1,15 @@
 'use client'
 import { useRef } from "react"
 
-const Home = () => {
-  let imageWrapper = useRef(null)
-  let originalPosition = useRef(null)
-  let currentPosition = useRef(null)
+const Home = ({imageWrapper, originalPosition, currentPosition}) => {
   const swipeStart = (e) => {
     originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
   }
   const swipeMove = (e) => {
-    currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
-    let distancey = (currentPosition.current[1] - originalPosition.current[1])
-    if(distancey < 0)distancey = distancey*2
-    // if(distancey >= -50 && distancey <= 50) imageWrapper.current.style.transform = `translateY(${distancey}px) translateX(-50%)`
-    if(distancey >= -50 && distancey <= 50){
-      requestAnimationFrame(() => {
-        imageWrapper.current.style.transform = `translateY(${distancey}px) translateX(-50%)`
-      })
-    }
+    
   }
   const swipeEnd = () => {
-    imageWrapper.current.style.transform = `translateY(0px) translateX(-50%)`
     if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return
     let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
