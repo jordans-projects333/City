@@ -8,12 +8,12 @@
   box-sizing: border-box;
 }
 
-.svh{
+.lvh{
   height: calc(100vh - 6vh);
-  height: calc(100svh - 6vh);
+  height: calc(100lvh - 6vh);
 }
 
-.lvh{
+.svh{
   height: 100vh;
-  height: 100lvh;
+  height: 100svh;
 }
