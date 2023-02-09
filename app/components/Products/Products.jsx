@@ -14,9 +14,11 @@ const Products = () => {
     let animationId = useRef(null)
     let currentIndex = useRef(0)
     let startPos = useRef(0)
+    let cameFromLeft = useRef(false)
     // Hover slider
     const slideForward = () => {
-        if(productPage.current.scrollLeft === 0){
+        console.log(cameFromLeft)
+        if(productPage.current.scrollLeft === 0 && cameFromLeft.current === true){
             let scrollAmount = 0
             const slideTimer = setInterval(function(){
                 productPage.current.scrollLeft += 15;
@@ -94,9 +96,9 @@ const Products = () => {
             <div ref={slider} className='flex duration-500'>
            
                 {productTitles.map((object, i) => {
-                    if(i === 2)return <SlideItem obj={'pink'} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true}/>
-                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true}/>
-                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false}/>
+                    if(i === 2)return <SlideItem obj={'pink'} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true}/>
+                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false}/>
+                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false}/>
                 })}
             </div>
         </div>
