@@ -16,25 +16,28 @@ const Products = () => {
     let startPos = useRef(0)
     // Hover slider
     const slideForward = () => {
-        let scrollAmount = 0
-          const slideTimer = setInterval(function(){
-            productPage.current.scrollLeft += 15;
-            scrollAmount += 15
-            if(scrollAmount > window.innerWidth){
-            //   if(productPage.current.scrollLeft === (productPage.current.scrollWidth/2)){
-                console.log('yum')
-                  window.clearInterval(slideTimer);
-              }
-          }, 1);
+        if(productPage.current.scrollLeft === 0){
+            let scrollAmount = 0
+            const slideTimer = setInterval(function(){
+                productPage.current.scrollLeft += 15;
+                scrollAmount += 15
+                if(scrollAmount > window.innerWidth){
+                //   if(productPage.current.scrollLeft === (productPage.current.scrollWidth/2)){
+                    window.clearInterval(slideTimer);
+                }
+            }, 1);
+            }
         }
-    // const slideBack = () => {
-    // let slideTimer = setInterval(function(){
-    //     slider.current.scrollLeft -= 15;
-    //     if(slider.current.scrollLeft === 0){
-    //         window.clearInterval(slideTimer);
-    //     }
-    // }, 1);
-    // }
+    const slideBack = () => {
+        if( productPage.current.scrollLeft === productPage.current.scrollWidth - productPage.current.clientWidth){
+            let slideTimer = setInterval(function(){
+                productPage.current.scrollLeft -= 15;
+                if(productPage.current.scrollLeft === 0){
+                    window.clearInterval(slideTimer);
+                }
+            }, 1);
+        }
+    }
     // Swipe slider
     function animation() {
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
@@ -85,12 +88,16 @@ const Products = () => {
         // }
     }, [isDragging.current])
     return (
-    <div ref={productPage} className='lvh bg-purple-200 relative overflow-x-hidden md:overflow-x-auto md:bg-blue-100'>
-        <div className='hidden md:block bg-purple-400/50 absolute right-0 h-[100%] w-[20vw] top-0' onMouseOver={() => slideForward()}></div>
+    <div ref={productPage} className='lvh bg-purple-200 relative overflow-x-hidden lg:overflow-x-auto lg:bg-blue-100'>
         <h3 className=" text-7xl whitespace-nowrap mt-4 ml-4 crab top-0">Products</h3>
         <div ref={slideContainer} className="w-[100vw] lg:w-[auto]">
             <div ref={slider} className='flex duration-500'>
-                {productTitles.map((object, i) => <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove}/>)}
+           
+                {productTitles.map((object, i) => {
+                    if(i === 2)return <SlideItem obj={'pink'} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true}/>
+                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true}/>
+                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false}/>
+                })}
             </div>
         </div>
     </div>

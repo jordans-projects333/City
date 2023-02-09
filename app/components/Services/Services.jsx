@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useEffect } from "react"
 import Showcase from "./Showcase"
-import Image from "next/image"
+import ServiceTab from "./ServiceTab"
 import service_Image2 from '../../images/services_2.jpg'
 import service_Image1 from '../../images/services_1.webp'
 import service_Image3 from '../../images/services_3.jpg'
@@ -10,9 +10,11 @@ const Services = ({slider}) => {
     let serviceImageWrapper1 = useRef(null)
     let serviceImageWrapper2 = useRef(null)
     let serviceImageWrapper3 = useRef(null)
+    let serviceImageWrapper4 = useRef(null)
     let serviceImage1 = useRef(null)
     let serviceImage2 = useRef(null)
     let serviceImage3 = useRef(null)
+    let serviceImage4 = useRef(null)
     let showcase = useRef(null)
     let servicesPage = useRef(null)
     let throttle = useRef(true)
@@ -23,6 +25,7 @@ const Services = ({slider}) => {
                 serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
                 serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
                 serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
+                serviceImage4.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
             })
             setTimeout(function () {   
                 throttle.current = true;          
@@ -41,7 +44,13 @@ const Services = ({slider}) => {
         })
         observer.observe(servicesPage.current)
     }, [servicesPage])
-    const showcaseIn = () => {
+    const showcaseIn = (e) => {
+        try {
+            document.createEvent('TouchEvent')
+            alert('movile')
+        } catch (error) {
+            alert('pc')
+        }
         requestAnimationFrame(() => {
             showcase.current.style.left = 0
             showcase.current.style.transitionDuration = '600ms'
@@ -52,18 +61,13 @@ const Services = ({slider}) => {
     return (
         <>
             <Showcase showcase={showcase} slider={slider}/>
-            <div ref={servicesPage} className="svh relative">
+            <div ref={servicesPage} className="lvh relative">
                 <h2 className="absolute top-[0%]">services</h2>
-                <div className="flex flex-col h-full pt-16 px-2 gap-2">
-                    <div ref={serviceImageWrapper1} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
-                        <Image ref={serviceImage1} src={service_Image1} alt="hair care" className='relative duration-300 left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-[150%] opacity-0'/>
-                    </div>
-                    <div ref={serviceImageWrapper2} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
-                        <Image ref={serviceImage2} src={service_Image2} alt="face care" className='relative duration-300 left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-[150%]'/>
-                    </div>
-                    <div ref={serviceImageWrapper3} className="flex-1 relative overflow-hidden" onClick={() => showcaseIn()}>
-                        <Image ref={serviceImage3} src={service_Image3} alt="nails care" className='relative duration-300 left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] w-[100%] h-[150%] opacity-0'/>
-                    </div>
+                <div className="flex flex-col h-full pt-16 px-2 pb-2 gap-2 lg:flex-row lg:gap-8 lg:p-8 lg:pt-12">
+                    <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn}/>
+                    <ServiceTab imageRef={serviceImage2} src={service_Image2} wrapperRef={serviceImageWrapper2} showcaseIn={showcaseIn}/>
+                    <ServiceTab imageRef={serviceImage3} src={service_Image3} wrapperRef={serviceImageWrapper3} showcaseIn={showcaseIn}/>
+                    <ServiceTab imageRef={serviceImage4} src={service_Image3} wrapperRef={serviceImageWrapper4} showcaseIn={showcaseIn}/>
                 </div>
             </div>
         </>
