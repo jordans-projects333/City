@@ -15,12 +15,19 @@ const Services = ({slider}) => {
     let serviceImage3 = useRef(null)
     let showcase = useRef(null)
     let servicesPage = useRef(null)
+    let throttle = useRef(true)
     const servicePageScroll = () => {
-        requestAnimationFrame(() => {
-            serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
-            serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
-            serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
-        })
+        if(throttle.current){
+            throttle.current = false
+            requestAnimationFrame(() => {
+                serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
+                serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
+                serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
+            })
+            setTimeout(function () {   
+                throttle.current = true;          
+            }, 200);
+        }
     }
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
