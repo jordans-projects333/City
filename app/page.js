@@ -16,15 +16,6 @@ export default function App() {
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
   }
   const elementsMove = (e) => {
-    // service image paralax
-    // if(servicesInView){
-    //   requestAnimationFrame(() => {
-    //     console.log('eeaaaa')
-    //     // serviceImage2.current.style.transfrom = `translate(50% ${50+(servicesPage.current.getBoundingClientRect().top/window.innerHeight * 10)}%)`
-    //     serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 40)}%) scale(1.4)`
-    //   })
-    // }
-    // moving elements
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     let distancey = (currentPosition.current[1] - originalPosition.current[1])
     if(distancey < 0)distancey = distancey*2
