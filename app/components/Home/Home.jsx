@@ -1,5 +1,6 @@
 'use client'
 import { useRef } from "react"
+import Socials from "./Socials"
 import Gallery from "./Gallery"
 import Image from "next/image"
 import homeImage from '../../images/homeImage1.jpg'
@@ -26,11 +27,21 @@ const Home = ({imageWrapper, originalPosition, currentPosition}) => {
   }
   return (
     <div className="flex overflow-x-hidden">
-      <div className="svh bg-orange-500 pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0" onTouchStart={(e) => swipeStart(e)} onTouchMove={(e) => swipeMove(e)} onTouchEnd={() => swipeEnd()}>
-        <h3 className=' text-7xl whitespace-nowrap ml-2 crab leading-[3rem]'>Hair & Beauty</h3>
-        <div ref={imageWrapper} className="absolute top-[calc(6vh+.5rem)] duration-500 bg-orange-300 left-[50%] translate-x-[-50%] w-[80%] h-[65%]">
-          <Image src={homeImage} className="h-full w-full object-cover opacity-0" alt='brb'/>
+      <div className="svh pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0" onTouchStart={(e) => swipeStart(e)} onTouchMove={(e) => swipeMove(e)} onTouchEnd={() => swipeEnd()}>
+        <h3 className='text-7xl whitespace-nowrap ml-2 font-[PlayfairDisplay] font-medium crab leading-[3rem]'>Hair & Beauty</h3>
+        <div ref={imageWrapper} className="absolute top-[calc(6vh+2.25rem)] duration-500 left-[50%] translate-x-[-50%] w-[80%] h-[60%]">
+          <Image src={homeImage} className="h-full w-full object-cover shadow-2xl bcrab" alt='brb'/>
+          <div className='absolute right-[calc(100%)] bottom-0 text-xl tracking-wide flex flex-col h-full bcrab'>
+            <div className='bg-black w-[1px] ml-auto mr-4 flex-grow mb-4 mt-8'></div>
+            <h6 className='vertical rotate-180 mb-8 font-solitreo'>Appointment only</h6>
+          </div>
+          <h3 className={`text-3xl font-[300] mt-4 leading-6 whitespace-nowrap crab`}>New . Luxurious . Personal</h3>
+          <div className='h-[2px] w-[100%] bg-black my-2'></div>
+          <p className='text-sm text-zinc-900 font-[Montserrat] font-semibold text-center'>
+              Pretty Little Salon is a new, luxurious hair salon in the Stoke area of Coventry. Our team have over 30 years of experience in the hair and beauty industry and are here to offer you the best treatments available.
+          </p>
         </div>
+        <Socials/>
       </div>
       <Gallery/>
     </div>

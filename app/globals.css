@@ -17,6 +17,9 @@
   height: 100vh;
   height: 100svh;
 }
+.vertical{
+  writing-mode: vertical-lr;
+}
 .logo{
   filter: invert(23%) sepia(62%) saturate(5860%) hue-rotate(320deg) brightness(97%) contrast(93%);
 }

@@ -7,7 +7,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      "solitreo" : ['var(--font-solitreo)']
+      "solitreo" : ['var(--font-solitreo)'],
+      "playfairDisplay" : ['var(--font-playfairDisplay)']
     },
     extend: {},
   },

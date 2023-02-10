@@ -9,7 +9,7 @@ const Header = ({hamburger, setHamburger}) => {
     let header = useRef(null)
     return (
         <header ref={header} className='fixed z-50 flex h-[6vh] w-full nav__wrapper'>
-            <div className='absolute bottom-0 ml-8 mb-1 left-0 h-[70%] aspect-square logo crab'>
+            <div className='absolute bottom-0 ml-8 mb-1 left-0 h-[65%] aspect-square logo crab'>
                 <Image src={logo} alt="logo" fill/>
             </div>
             <h2 className={`pl-2 pt-4 pb-2 text-2xl bcrab font-solitreo logoShadow z-40 ${hamburger && "flash"}`}>Pretty Little Salon</h2>
