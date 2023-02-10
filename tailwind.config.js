@@ -6,6 +6,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      "solitreo" : ['var(--font-solitreo)']
+    },
     extend: {},
   },
   plugins: [],

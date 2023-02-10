@@ -1,6 +1,8 @@
 'use client'
 import { useRef } from "react"
 import Gallery from "./Gallery"
+import Image from "next/image"
+import homeImage from '../../images/homeImage1.jpg'
 
 const Home = ({imageWrapper, originalPosition, currentPosition}) => {
   const swipeStart = (e) => {
@@ -23,10 +25,12 @@ const Home = ({imageWrapper, originalPosition, currentPosition}) => {
     }
   }
   return (
-    <div className="flex overflow-x-scroll">
+    <div className="flex overflow-x-hidden">
       <div className="svh bg-orange-500 pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0" onTouchStart={(e) => swipeStart(e)} onTouchMove={(e) => swipeMove(e)} onTouchEnd={() => swipeEnd()}>
         <h3 className=' text-7xl whitespace-nowrap ml-2 crab leading-[3rem]'>Hair & Beauty</h3>
-        <div ref={imageWrapper} className="absolute top-[calc(6vh+.5rem)] duration-500 bg-orange-300 left-[50%] translate-x-[-50%] w-[80%] h-[65%]">hjjj</div>
+        <div ref={imageWrapper} className="absolute top-[calc(6vh+.5rem)] duration-500 bg-orange-300 left-[50%] translate-x-[-50%] w-[80%] h-[65%]">
+          <Image src={homeImage} className="h-full w-full object-cover opacity-0" alt='brb'/>
+        </div>
       </div>
       <Gallery/>
     </div>

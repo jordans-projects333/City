@@ -4,9 +4,10 @@ import Home from "./components/Home/Home"
 import Services from "./components/Services/Services"
 import Products from "./components/Products/Products"
 import Footer from "./components/Footer"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 export default function App() {
+  const [hamburger, setHamburger] = useState(false)
   let slider = useRef(null)
   let imageWrapper = useRef(null)
   let originalPosition = useRef(null)
@@ -30,7 +31,7 @@ export default function App() {
   }
   return (
     <>
-      <Header/>
+      <Header hamburger={hamburger} setHamburger={setHamburger}/>
       <div ref={slider} className="relative top-0 left-0 overflow-x-hidden" onTouchStart={(e) => elementsStart(e)} onTouchMove={(e) => elementsMove(e)} onTouchEnd={() => elementsEnd()}>
         <Home imageWrapper={imageWrapper} originalPosition={originalPosition} currentPosition={currentPosition}/>
         <Services slider={slider}/>
