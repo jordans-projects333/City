@@ -17,7 +17,6 @@ const Products = () => {
     let cameFromLeft = useRef(false)
     // Hover slider
     const slideForward = () => {
-        console.log(cameFromLeft)
         if(productPage.current.scrollLeft === 0 && cameFromLeft.current === true){
             let scrollAmount = 0
             const slideTimer = setInterval(function(){
