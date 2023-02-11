@@ -79,8 +79,9 @@ const Products = () => {
         if(throttle.current){
             throttle.current = false
             currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
-            let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
-            if(swipeDistance > -50 && swipeDistance < 0)requestAnimationFrame(animation)
+            let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85)) / (window.innerWidth * .85)
+            console.log(swipeDistance)
+            if(swipeDistance > -0.35 && swipeDistance < 0)requestAnimationFrame(animation)
             setTimeout(() => {
                 throttle.current = true
             },150)
@@ -91,10 +92,10 @@ const Products = () => {
         isDragging.current = false
         cancelAnimationFrame(animationId.current)
         let movedBy = currentTranslation.current - prevTranslation.current
-        if(movedBy < -50 && currentIndex.current < allSlideItems.current.length -1){
+        if(movedBy < -15 && currentIndex.current < allSlideItems.current.length -1){
             currentIndex.current++
             setPositionByIndex()
-        }else if(movedBy > 50 && currentIndex.current > 0){
+        }else if(movedBy > 15 && currentIndex.current > 0){
             currentIndex.current--
             setPositionByIndex()
         }else{
@@ -113,6 +114,12 @@ const Products = () => {
             sliderIndex.current.push(el)
         }
     }
+    const slideClicked = (i) => {
+        if(i != currentIndex.current){
+            currentIndex.current++
+            setPositionByIndex()
+        }
+    }
     useEffect(() => {
         // disable context menu on hold
         window.oncontextmenu = (e) => {
@@ -128,9 +135,9 @@ const Products = () => {
             <div ref={slider} className='flex duration-500 h-full'>
            
                 {productTitles.map((object, i) => {
-                    if(i === 2)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true} productsDescription={productsDescription} productsPrices={productPrices}/>
-                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
-                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
+                    if(i === 2)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true} productsDescription={productsDescription} productsPrices={productPrices} slideClicked={slideClicked}/>
+                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false} productsDescription={productsDescription} productsPrices={productPrices} slideClicked={slideClicked}/>
+                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false} productsDescription={productsDescription} productsPrices={productPrices} slideClicked={slideClicked}/>
                 })}
             </div>
         </div>

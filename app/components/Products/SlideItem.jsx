@@ -8,13 +8,13 @@ import product5 from '../../images/Products/product_5.webp'
 import product6 from '../../images/Products/product_6.webp'
 const productImages = [product1, product2, product3, product4, product5, product6]
 
-const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mouseOver, canClick, cameFromLeft, left, productsDescription, productsPrices, sliderIndex}) => {
+const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mouseOver, canClick, cameFromLeft, left, productsDescription, productsPrices, sliderIndex, slideClicked}) => {
   return (
     // image draggable = false onDragStart={(e) => e.preventDefault()}
     <div ref={refFunction} className={`lg:w-[30vw] ${index == 5 ? "w-[100vw]" : 'w-[85vw]'} flex max-h-full flex-col flex-shrink-0 border-r border-black ${index == 0 && 'border-l border-black'} ${index == 5 && 'border-r border-black'}`} 
             onTouchStart={(e) => touchStart(e)} onTouchEnd={() => touchEnd()} onTouchMove={(e) => touchMove(e)} 
             onMouseOver={canClick ? mouseOver : undefined } onMouseEnter={() => left ? cameFromLeft.current = true : undefined } 
-            onMouseLeave={() => left ? setTimeout(() => cameFromLeft.current = false, 200): undefined }>
+            onMouseLeave={() => left ? setTimeout(() => cameFromLeft.current = false, 200): undefined } onClick={() => slideClicked(index)}>
         <div className='w-[55%] aspect-square relative mt-11'>
             <Image src={productImages[index]} fill alt="product"/>
             <div className='absolute left-[100%] vertical bottom-0 flex h-full'>

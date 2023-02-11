@@ -30,7 +30,7 @@ const Footer = () => {
                 </li>
             </ul>
         </div>
-        <div className='bg-white h-[1px] w-[90%]'></div>
+        <div className='bg-white h-[1px] mt-1 w-[90%]'></div>
         <div className='ml-2 my-2 text-xs font-medium'>
             <h4>Copyright ©2023 | | Pretty Little Salon Coventry</h4>
         </div>
