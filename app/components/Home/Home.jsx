@@ -52,11 +52,12 @@ const Home = ({imageWrapper, originalPosition, currentPosition, serviceSnap}) =>
     }
   }
   return (
-    <div className="flex overflow-x-hidden border-b border-black" ref={homePage} onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
-      <div className="svh pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0">
+    <div className="flex overflow-x-hidden" ref={homePage} onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
+      <div className="svh pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0  border-b border-black">
         <h3 className='text-7xl whitespace-nowrap ml-2 font-[PlayfairDisplay] font-medium crab leading-[3rem]'>Hair & Beauty</h3>
         <div ref={imageWrapper} className="absolute top-[calc(6vh+2.25rem)] duration-500 left-[50%] translate-x-[-50%] w-[80%] h-[60%]">
           <Image src={homeImage} className="h-full w-full object-cover shadow-2xl bcrab" alt='brb'/>
+          <h2 className={`absolute top-0 right-0 px-4 mt-8 pl-8 py-1 text-lg tracking-wider font-[200] text-white bg-black`} onTouchStart={() => homeSwipeRight()}>See Gallery</h2>
           <div className='absolute right-[calc(100%)] bottom-0 text-xl tracking-wide flex flex-col h-full bcrab'>
             <div className='bg-black w-[1px] ml-auto mr-4 flex-grow mb-4 mt-8'></div>
             <h6 className='vertical rotate-180 mb-8 font-solitreo'>Appointment only</h6>
