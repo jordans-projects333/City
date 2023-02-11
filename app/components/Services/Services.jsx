@@ -9,6 +9,7 @@ import ServiceTab from "./ServiceTab"
 import service_Image2 from '../../images/services_2.jpg'
 import service_Image1 from '../../images/services_1.webp'
 import service_Image3 from '../../images/services_3.jpg'
+import service_Image4 from '../../images/services_4.jpg'
 
 const Services = ({slider}) => {
     const [treatments, SetTreatents] = useState(null)
@@ -28,10 +29,10 @@ const Services = ({slider}) => {
         if(throttle.current){
             throttle.current = false
             requestAnimationFrame(() => {
-                serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
-                serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
-                serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
-                serviceImage4.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 25)}%)`
+                serviceImage1.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
+                serviceImage2.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
+                serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
+                serviceImage4.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
             })
             setTimeout(function () {   
                 throttle.current = true;          
@@ -96,14 +97,14 @@ const Services = ({slider}) => {
     return (
         <>
            
-            <div ref={servicesPage} className="lvh relative">
+            <div ref={servicesPage} className="lvh relative flex flex-col">
             <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments}/>
-                <h2 className="absolute top-[0%]">services</h2>
-                <div ref={serviceTabsWrapper} className="flex flex-col h-full pt-16 px-2 pb-2 gap-2 lg:flex-row lg:gap-8 lg:p-8 lg:pt-12">
-                    <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn} treatmentType={'hair'}/>
-                    <ServiceTab imageRef={serviceImage2} src={service_Image2} wrapperRef={serviceImageWrapper2} showcaseIn={showcaseIn} treatmentType={'face'}/>
-                    <ServiceTab imageRef={serviceImage3} src={service_Image3} wrapperRef={serviceImageWrapper3} showcaseIn={showcaseIn} treatmentType={'nails'}/>
-                    <ServiceTab imageRef={serviceImage4} src={service_Image3} wrapperRef={serviceImageWrapper4} showcaseIn={showcaseIn} treatmentType={'body'}/>
+            <h3 className='text-4xl whitespace-nowrap ml-3 font-[300] crab leading-[3rem] pt-2 -z-20'>Services</h3>
+                <div ref={serviceTabsWrapper} className="flex flex-col flex-grow px-2 pb-2 gap-2 lg:flex-row lg:gap-8 lg:p-8 lg:pt-12">
+                    <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn} treatmentType={'hair'} title={'Hair'} number={12}/>
+                    <ServiceTab imageRef={serviceImage2} src={service_Image2} wrapperRef={serviceImageWrapper2} showcaseIn={showcaseIn} treatmentType={'face'} title={'Face'} number={9}/>
+                    <ServiceTab imageRef={serviceImage3} src={service_Image3} wrapperRef={serviceImageWrapper3} showcaseIn={showcaseIn} treatmentType={'nails'} title={'Nails'} number={23}/>
+                    <ServiceTab imageRef={serviceImage4} src={service_Image4} wrapperRef={serviceImageWrapper4} showcaseIn={showcaseIn} treatmentType={'body'} title={'Body'} number={4}/>
                 </div>
             </div>
         </>

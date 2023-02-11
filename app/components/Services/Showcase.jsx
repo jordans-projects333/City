@@ -27,7 +27,7 @@ const Showcase = ({showcase, slider, serviceTabsWrapper, treatments}) => {
         }
     }
     return (
-        <div ref={showcase} className="fixed left-[100%] top-[6vh] w-full h-[100vh] z-10 lg:absolute">
+        <div ref={showcase} className="fixed left-[100%] top-[6vh] w-full h-[100vh] z-10 lg:absolute bg-white">
             <div className="bg-green-500 w-full h-[4rem]" onClick={() => showcaseOut()}></div>
             {treatments}
         </div>

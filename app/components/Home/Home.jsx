@@ -26,7 +26,7 @@ const Home = ({imageWrapper, originalPosition, currentPosition}) => {
     }
   }
   return (
-    <div className="flex overflow-x-hidden">
+    <div className="flex overflow-x-hidden border-b border-black">
       <div className="svh pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0" onTouchStart={(e) => swipeStart(e)} onTouchMove={(e) => swipeMove(e)} onTouchEnd={() => swipeEnd()}>
         <h3 className='text-7xl whitespace-nowrap ml-2 font-[PlayfairDisplay] font-medium crab leading-[3rem]'>Hair & Beauty</h3>
         <div ref={imageWrapper} className="absolute top-[calc(6vh+2.25rem)] duration-500 left-[50%] translate-x-[-50%] w-[80%] h-[60%]">
