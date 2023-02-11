@@ -5,7 +5,7 @@ import product1 from '../../images/Products/product_1.webp'
 const SlideItem = ({obj, refFunction, touchStart, touchEnd, touchMove, mouseOver, canClick, cameFromLeft, left}) => {
   return (
     // image draggable = false onDragStart={(e) => e.preventDefault()}
-    <div ref={refFunction} className='w-[100vw] lg:w-[30vw] flex-shrink-0 h-[5rem]' 
+    <div ref={refFunction} className='w-[100vw] lg:w-[30vw] flex-shrink-0 border-r border-black' 
             onTouchStart={(e) => touchStart(e)} onTouchEnd={() => touchEnd()} onTouchMove={(e) => touchMove(e)} 
             onMouseOver={canClick ? mouseOver : undefined } onMouseEnter={() => left ? cameFromLeft.current = true : undefined } 
             onMouseLeave={() => left ? setTimeout(() => cameFromLeft.current = false, 200): undefined }>

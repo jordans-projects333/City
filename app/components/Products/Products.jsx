@@ -63,10 +63,10 @@ const Products = () => {
         isDragging.current = false
         cancelAnimationFrame(animationId.current)
         let movedBy = currentTranslation.current - prevTranslation.current
-        if(movedBy < -100 && currentIndex.current < allSlideItems.current.length -1){
+        if(movedBy < -50 && currentIndex.current < allSlideItems.current.length -1){
             currentIndex.current++
             setPositionByIndex()
-        }else if(movedBy > 100 && currentIndex.current > 0){
+        }else if(movedBy > 50 && currentIndex.current > 0){
             currentIndex.current--
             setPositionByIndex()
         }else{
@@ -93,7 +93,7 @@ const Products = () => {
     <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
         <h3 className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium ">Products</h3>
         <div ref={slideContainer} className="w-[100vw] lg:w-[auto] flex-grow">
-            <div ref={slider} className='flex duration-500'>
+            <div ref={slider} className='flex duration-500 h-full'>
            
                 {productTitles.map((object, i) => {
                     if(i === 2)return <SlideItem obj={'pink'} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true}/>
