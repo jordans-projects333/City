@@ -11,7 +11,7 @@ const productImages = [product1, product2, product3, product4, product5, product
 const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mouseOver, canClick, cameFromLeft, left, productsDescription, productsPrices}) => {
   return (
     // image draggable = false onDragStart={(e) => e.preventDefault()}
-    <div ref={refFunction} className={`lg:w-[30vw] w-[85vw] max-h-[70vh] overflow-y-auto overflow-x-hidden flex-shrink-0 border-r border-black ${index == 1 && 'bg-white'} ${index == 3 && 'bg-white'}`} 
+    <div ref={refFunction} className={`lg:w-[30vw] w-[100vw] flex-shrink-0 border-r border-black ${index == 0 && 'border-l border-black'} ${index == 5 && 'border-r border-black'}`} 
             onTouchStart={(e) => touchStart(e)} onTouchEnd={() => touchEnd()} onTouchMove={(e) => touchMove(e)} 
             onMouseOver={canClick ? mouseOver : undefined } onMouseEnter={() => left ? cameFromLeft.current = true : undefined } 
             onMouseLeave={() => left ? setTimeout(() => cameFromLeft.current = false, 200): undefined }>
@@ -31,9 +31,9 @@ const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mo
             <div className='border-black border-[1px] h-[.5rem] w-[.5rem] rounded-full'></div>
         </div>
         <h3 className=' ml-4 text-xl tracking-wide font-[Montserrat] font-medium'>{obj}</h3>
-        <div className='h-[2px] mx-6 bg-black w-[100%]'></div>
+        <div className='h-[2px] mx-6 bg-black w-[85%]'></div>
             <h3 className='ml-6 font-medium text-lg mb-1 font-[Montserrat]'>{productsPrices[index]}</h3>
-            <p className='text-sm font-medium mb-4 pl-6 pr-8 font-[Montserrat] text-zinc-800'>
+            <p className='text-sm font-medium mb-4 pl-6 pr-8 font-[Montserrat] text-zinc-800 max-h-[20vh] overflow-y-auto overflow-x-hidden '>
                 {productsDescription[index]}
             </p>
     </div>
