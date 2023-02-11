@@ -14,7 +14,7 @@ import gallery10 from '../../images/Gallery/10.jpg'
 import gallery11 from '../../images/Gallery/11.jpg'
 import gallery12 from '../../images/Gallery/12.jpg'
 
-const Gallery = () => {
+const Gallery = ({homeSwipeLeft}) => {
     let gallerySlide1 = useRef(null)
     let gallerySlide2 = useRef(null)
     let gallerySlide3 = useRef(null)
@@ -47,7 +47,7 @@ const Gallery = () => {
     }
   return (
     <div className='flex-shrink-0 flex flex-col relative'>
-        <div className='mt-[6vh] w-full bg-white flex items-center justify-center gap-2 pr-4 py-1 border-t border-black'>
+        <div className='mt-[6vh] w-full bg-white flex items-center justify-center gap-2 pr-4 py-1 border-t border-black' onTouchStart={() => homeSwipeLeft()}>
             <svg className='h-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
             <h3 className='font-semibold tracking-wider text-lg'>Leave Gallery</h3>
         </div>

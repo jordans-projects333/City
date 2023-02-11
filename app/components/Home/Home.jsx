@@ -68,9 +68,9 @@ const Home = ({imageWrapper, originalPosition, currentPosition, serviceSnap}) =>
               Pretty Little Salon is a new, luxurious hair salon in the Stoke area of Coventry. Our team have over 30 years of experience in the hair and beauty industry and are here to offer you the best treatments available.
           </p>
         </div>
-        <Socials/>
+        <Socials navSocials={false}/>
       </div>
-      <Gallery/>
+      <Gallery homeSwipeLeft={homeSwipeLeft}/>
     </div>
   )
 }
