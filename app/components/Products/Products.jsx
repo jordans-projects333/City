@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useRef } from 'react'
 import SlideItem from './SlideItem'
+import Footer from '../Footer'
 const productTitles = ['product1', 'product2', 'product3', 'product4', 'product5', 'product6']
 
 const Products = () => {
@@ -89,9 +90,9 @@ const Products = () => {
         // }
     }, [isDragging.current])
     return (
-    <div ref={productPage} className='lvh bg-purple-200 relative overflow-x-hidden lg:overflow-x-auto lg:bg-blue-100'>
-        <h3 className=" text-7xl whitespace-nowrap mt-4 ml-4 crab top-0">Products</h3>
-        <div ref={slideContainer} className="w-[100vw] lg:w-[auto]">
+    <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
+        <h3 className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium ">Products</h3>
+        <div ref={slideContainer} className="w-[100vw] lg:w-[auto] flex-grow">
             <div ref={slider} className='flex duration-500'>
            
                 {productTitles.map((object, i) => {
@@ -101,6 +102,7 @@ const Products = () => {
                 })}
             </div>
         </div>
+        <Footer/>
     </div>
     )
 }

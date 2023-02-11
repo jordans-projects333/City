@@ -3,7 +3,6 @@ import Header from "./components/Header"
 import Home from "./components/Home/Home"
 import Services from "./components/Services/Services"
 import Products from "./components/Products/Products"
-import Footer from "./components/Footer"
 import { useRef, useState } from "react"
 
 export default function App() {
@@ -36,7 +35,6 @@ export default function App() {
         <Home imageWrapper={imageWrapper} originalPosition={originalPosition} currentPosition={currentPosition}/>
         <Services slider={slider}/>
         <Products/>
-        <Footer/>
       </div>
     </>
   )
