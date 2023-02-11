@@ -15,6 +15,7 @@ const productsDescription = [
 
 const Products = () => {
     let productPage = useRef(null)
+    let throttle = useRef(true)
     let productPageTitle = useRef(null)
     let allSlideItems = useRef([])
     let sliderIndex = useRef([])
@@ -59,11 +60,13 @@ const Products = () => {
         currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
         prevTranslation.current = currentTranslation.current
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
+        productPageTitle.current.style.transitionDuration = '150ms'
         productPageTitle.current.style.opacity = 0
         if(currentIndex.current != 1 || currentIndex != 5)sliderIndex.current[currentIndex.current].style.opacity = 0
         setTimeout(() => {
             sliderIndex.current[currentIndex.current].style.transitionDuration = '300ms'
             sliderIndex.current[currentIndex.current].style.opacity = 1
+            productPageTitle.current.style.transitionDuration = '500ms'
             productPageTitle.current.style.opacity = 1
         }, 300)
     }
@@ -73,10 +76,15 @@ const Products = () => {
         animationId.current = requestAnimationFrame(animation)
     }
     const touchMove = (e) => {
-        currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
-        let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
-        console.log(swipeDistance)
-        if(swipeDistance > -50 && swipeDistance < 0)requestAnimationFrame(animation)
+        if(throttle.current){
+            throttle.current = false
+            currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
+            let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
+            if(swipeDistance > -50 && swipeDistance < 0)requestAnimationFrame(animation)
+            setTimeout(() => {
+                throttle.current = true
+            },150)
+        }
 
     }
     const touchEnd = () => {
@@ -115,7 +123,7 @@ const Products = () => {
     })
     return (
     <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
-        <h3 ref={productPageTitle} className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium duration-150">Products</h3>
+        <h3 ref={productPageTitle} className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium">Products</h3>
         <div ref={slideContainer} className="w-[100vw] lg:w-[auto] flex-grow">
             <div ref={slider} className='flex duration-500 h-full'>
            
