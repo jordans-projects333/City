@@ -79,16 +79,13 @@ const Products = () => {
         }
     }
     useEffect(() => {
-        if(isDragging.current === false){
-            cancelAnimationFrame(animationId.current)
-        }
         // disable context menu on hold
         window.oncontextmenu = (e) => {
             e.preventDefault()
             e.stopPropagation()
             return false
         }
-    }, [isDragging.current])
+    })
     return (
     <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
         <h3 className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium ">Products</h3>
