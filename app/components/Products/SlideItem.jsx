@@ -8,7 +8,7 @@ import product5 from '../../images/Products/product_5.webp'
 import product6 from '../../images/Products/product_6.webp'
 const productImages = [product1, product2, product3, product4, product5, product6]
 
-const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mouseOver, canClick, cameFromLeft, left, productsDescription, productsPrices}) => {
+const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mouseOver, canClick, cameFromLeft, left, productsDescription, productsPrices, sliderIndex}) => {
   return (
     // image draggable = false onDragStart={(e) => e.preventDefault()}
     <div ref={refFunction} className={`lg:w-[30vw] ${index == 5 ? "w-[100vw]" : 'w-[85vw]'} flex-shrink-0 border-r border-black ${index == 0 && 'border-l border-black'} ${index == 5 && 'border-r border-black'}`} 
@@ -22,13 +22,13 @@ const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mo
                 <h3 className='ml-2 mb-4'>Purchase in store</h3>
             </div>
         </div>
-        <div className='flex justify-center items-center gap-4 ml-8 mb-3 mt-4'>
-            <div className='bg-black h-[.5rem] w-[.5rem] rounded-full'></div>
-            <div className='border-black border-[1px] h-[.5rem] w-[.5rem] rounded-full'></div>
-            <div className='border-black border-[1px] h-[.5rem] w-[.5rem] rounded-full'></div>
-            <div className='border-black border-[1px] h-[.5rem] w-[.5rem] rounded-full'></div>
-            <div className='border-black border-[1px] h-[.5rem] w-[.5rem] rounded-full'></div>
-            <div className='border-black border-[1px] h-[.5rem] w-[.5rem] rounded-full'></div>
+        <div ref={sliderIndex} className='flex justify-center items-center gap-4 ml-8 mb-3 mt-4'>
+            <div className={`${(index == 0 ? 'bg-black' : 'border-black border-[1px]')} h-[.5rem] w-[.5rem] rounded-full`}></div>
+            <div className={`${(index == 1 ? 'bg-black' : 'border-black border-[1px]')} h-[.5rem] w-[.5rem] rounded-full`}></div>
+            <div className={`${(index == 2 ? 'bg-black' : 'border-black border-[1px]')} h-[.5rem] w-[.5rem] rounded-full`}></div>
+            <div className={`${(index == 3 ? 'bg-black' : 'border-black border-[1px]')} h-[.5rem] w-[.5rem] rounded-full`}></div>
+            <div className={`${(index == 4 ? 'bg-black' : 'border-black border-[1px]')} h-[.5rem] w-[.5rem] rounded-full`}></div>
+            <div className={`${(index == 5 ? 'bg-black' : 'border-black border-[1px]')} h-[.5rem] w-[.5rem] rounded-full`}></div>
         </div>
         <h3 className=' ml-4 text-xl tracking-wide font-[Montserrat] font-medium'>{obj}</h3>
         <div className='h-[2px] mx-6 bg-black w-[85%]'></div>

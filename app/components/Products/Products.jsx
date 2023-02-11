@@ -15,7 +15,9 @@ const productsDescription = [
 
 const Products = () => {
     let productPage = useRef(null)
+    let productPageTitle = useRef(null)
     let allSlideItems = useRef([])
+    let sliderIndex = useRef([])
     let slider = useRef(null)
     let slideContainer = useRef(null)
     let isDragging = useRef(false)
@@ -57,6 +59,13 @@ const Products = () => {
         currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
         prevTranslation.current = currentTranslation.current
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
+        productPageTitle.current.style.opacity = 0
+        if(currentIndex.current != 1 || currentIndex != 5)sliderIndex.current[currentIndex.current].style.opacity = 0
+        setTimeout(() => {
+            sliderIndex.current[currentIndex.current].style.transitionDuration = '300ms'
+            sliderIndex.current[currentIndex.current].style.opacity = 1
+            productPageTitle.current.style.opacity = 1
+        }, 300)
     }
     const touchStart = (e) => {
         isDragging.current = true
@@ -81,12 +90,19 @@ const Products = () => {
             currentIndex.current--
             setPositionByIndex()
         }else{
-            setPositionByIndex()
+            currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
+            prevTranslation.current = currentTranslation.current
+            slider.current.style.transform = `translateX(${currentTranslation.current}px)`
         }
     }
     const addToSlideItems = (el) => {
         if(el && !allSlideItems.current.includes(el)){
             allSlideItems.current.push(el)
+        }
+    }
+    const addToSliderIndex = (el) => {
+        if(el && !sliderIndex.current.includes(el)){
+            sliderIndex.current.push(el)
         }
     }
     useEffect(() => {
@@ -99,14 +115,14 @@ const Products = () => {
     })
     return (
     <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
-        <h3 className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium ">Products</h3>
+        <h3 ref={productPageTitle} className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium duration-150">Products</h3>
         <div ref={slideContainer} className="w-[100vw] lg:w-[auto] flex-grow">
             <div ref={slider} className='flex duration-500 h-full'>
            
                 {productTitles.map((object, i) => {
-                    if(i === 2)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true} productsDescription={productsDescription} productsPrices={productPrices}/>
-                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
-                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
+                    if(i === 2)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true} productsDescription={productsDescription} productsPrices={productPrices}/>
+                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
+                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} sliderIndex={addToSliderIndex} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
                 })}
             </div>
         </div>
