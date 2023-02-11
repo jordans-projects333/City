@@ -2,7 +2,16 @@
 import React, { useEffect, useRef } from 'react'
 import SlideItem from './SlideItem'
 import Footer from '../Footer'
-const productTitles = ['product1', 'product2', 'product3', 'product4', 'product5', 'product6']
+const productTitles = ['BeautyWorks Nourishing Mask', 'Olaplex Bundle', 'product3', 'product4', 'product5', 'product6']
+const productPrices = ['£15.00','£70.00','','','','']
+const productsDescription = [
+    'Beauty Works Pearl Nourishing Argan Oil Mask is specifically formulated to deeply nourish and restructure all hair types. Improve your hair texture and shine in just 10 Minutes with our super nourishing formula. Using a combination of organic Argan Oil and Milk Protein, the renowned properties of Keratin will ensure each strand of hair is left feeling revitalised and nourished, enhancing the hairs body and tone. Our formula acts as a deep conditioning treatment designed to repair hair, this creamy formula helps to moisturise strands and ensure they are soft and shiny. In a heavier concentration than normal conditioners. You can leave a hair mask in for an extended period of time, from 5 minutes to overnight depending on the health of your hair or hair extensions. Use weekly to restore nourishment to hair extensions',
+    'Olaplex Hero Bundle has you covered with three intensive strengthening treatments that work together to cleanse, nourish, fortify and protect your mane. Combining a shampoo and conditioner duo with a reparative treatment, all crafted with high-performance ingredients and technology, the trio promise to leave your hair vibrant, shiny, manageable and resilient to external damaging factors.<br>Suitable for all hair types.<br>Free from parabens, sulphates and phosphates.<br>Vegan. Cruelty-free.<br>Made in the USA.<br>The Set Contains:<br>>No.3 Hair Perfector (100ml)<br> An at-home bond builder that utilises the same active ingredient found in all professional Olaplex products. Suitable for all hair types, the innovative formula works on a molecular level to revitalise and regenerate dry, damaged strands that have been broken due to chemical, thermal and mechanical effects. Ideal for weekly use in between salon services to maintain strong, healthy-looking hair.<br> No.4 Bond Maintenance™ Shampoo (250ml)<br>A resilience-boosting hair cleanser formulated with Olaplex’s patented technology that finds and re-links broken disulphide bonds in the hair, repairing damage while strengthening the hair structure. Helping to increase moisture levels for improved elasticity, the nourishing shampoo preserves the quality and longevity of colour to prevent fading and oxidisation whilst gently removing the build-up of dirt, excess oils and hair products to leave your hair clean, silky soft and glossy.<br>No.5 Bond Maintenance™ Conditioner (250ml)<br>A rehydrating and bond-repairing treatment also formulated with the same patented technology as the shampoo. Ideal for those with coloured or damaged hair types thanks to its colour-preserving properties, it provides a burst of much needed hydration for a glossy shine. Effectively detangling and helping to make tresses more manageable, the silky textured fluid hydrates and strengthens, while working to repair the damage caused by colouring and styling. Locks are left smoother, glossier and much healthier.',
+    '',
+    '',
+    '',
+    ''
+]
 
 const Products = () => {
     let productPage = useRef(null)
@@ -87,15 +96,15 @@ const Products = () => {
         }
     })
     return (
-    <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
+    <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col h-[70lvh]'>
         <h3 className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium ">Products</h3>
         <div ref={slideContainer} className="w-[100vw] lg:w-[auto] flex-grow">
             <div ref={slider} className='flex duration-500 h-full'>
            
                 {productTitles.map((object, i) => {
-                    if(i === 2)return <SlideItem obj={'pink'} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true}/>
-                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false}/>
-                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false}/>
+                    if(i === 2)return <SlideItem obj={'pink'} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true} productsDescription={productsDescription} productsPrices={productPrices}/>
+                    if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
+                    return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
                 })}
             </div>
         </div>
