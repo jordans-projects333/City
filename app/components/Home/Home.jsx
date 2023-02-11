@@ -5,29 +5,55 @@ import Gallery from "./Gallery"
 import Image from "next/image"
 import homeImage from '../../images/homeImage1.jpg'
 
-const Home = ({imageWrapper, originalPosition, currentPosition}) => {
+const Home = ({imageWrapper, originalPosition, currentPosition, serviceSnap}) => {
+  let homePage = useRef(null)
+  let snapTime = useRef(true)
+  let onGallery = useRef(false)
   const swipeStart = (e) => {
     originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
+    snapTime.current = true
+    setTimeout(() => {
+      snapTime.current = false
+    }, 300)
   }
-  const swipeMove = (e) => {
-    
+  const homeSwipeRight = () => {
+    let scrollAmount = 0
+    onGallery.current = true
+    const homeSlideTimer = setInterval(function(){
+        homePage.current.scrollLeft += 15;
+        scrollAmount += 15
+        if(scrollAmount > window.innerWidth){
+            window.clearInterval(homeSlideTimer);
+        }
+    }, 1);
+  }
+  const homeSwipeLeft = () => {
+    onGallery.current = false
+    let homeslideTimer2 = setInterval(function(){
+      homePage.current.scrollLeft -= 15;
+      if(homePage.current.scrollLeft === 0){
+          window.clearInterval(homeslideTimer2);
+      }
+    }, 1);
   }
   const swipeEnd = () => {
     if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return
+    if(snapTime.current != true)return
     let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
     // Angle 30 favours y, Angle 45 neutral, Angle 60 favours x.
     if(theta < 30){
-      ((currentPosition.current[0] - originalPosition.current[0]) > 0) ? console.log('right') : console.log('left')
-    }else{
-      ((currentPosition.current[1] - originalPosition.current[1]) > 0) ? console.log('down') : console.log('up')
+      ((currentPosition.current[0] - originalPosition.current[0]) > 0) ? homeSwipeLeft() : homeSwipeRight()
+    }else if(currentPosition.current[1] - originalPosition.current[1] < 0 && onGallery.current == false){
+      serviceSnap.current.scrollIntoView({behavior: 'smooth'})
+      // serviceSnap.current.scrollIntoView()
     }
   }
   return (
-    <div className="flex overflow-x-hidden border-b border-black">
-      <div className="svh pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0" onTouchStart={(e) => swipeStart(e)} onTouchMove={(e) => swipeMove(e)} onTouchEnd={() => swipeEnd()}>
+    <div className="flex overflow-x-hidden border-b border-black" ref={homePage} onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
+      <div className="svh pt-[6vh] overflow-x-hidden relative lg:w-[40vw] w-[100vw] flex-shrink-0">
         <h3 className='text-7xl whitespace-nowrap ml-2 font-[PlayfairDisplay] font-medium crab leading-[3rem]'>Hair & Beauty</h3>
         <div ref={imageWrapper} className="absolute top-[calc(6vh+2.25rem)] duration-500 left-[50%] translate-x-[-50%] w-[80%] h-[60%]">
           <Image src={homeImage} className="h-full w-full object-cover shadow-2xl bcrab" alt='brb'/>

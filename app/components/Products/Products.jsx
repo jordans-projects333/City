@@ -13,7 +13,7 @@ const productsDescription = [
     'Beauty Works Anti-Yellow Shampoo 200ml, neutralises yellow & brassy tones to reduce the appearance of discolouration, whilst giving shine to dull hair. Beauty Works Anti Yellow Shampoo formula is 100% vegan friendly our natural ingredients deliver soft manageable hair.'
 ]
 
-const Products = () => {
+const Products = ({productSnap}) => {
     let productPage = useRef(null)
     let throttle = useRef(true)
     let productPageTitle = useRef(null)
@@ -61,13 +61,8 @@ const Products = () => {
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
     }
     const setPositionByIndex = () => {
-        console.log('triggered')
-        console.log('index', currentIndex.current)
-        console.log('before', currentTranslation.current)
         currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
-        console.log('after', currentTranslation.current)
         prevTranslation.current = currentTranslation.current
-        console.log('prev', prevTranslation.current)
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
         productPageTitle.current.style.transitionDuration = '150ms'
         productPageTitle.current.style.opacity = 0
@@ -84,13 +79,12 @@ const Products = () => {
         // console.log(4)
     }
     const touchMove = (e) => {
-        console.log('what2')
         isDragging.current = true
         if(throttle.current){
             throttle.current = false
             currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
             let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
-            if(swipeDistance > -120 && swipeDistance < 0)requestAnimationFrame(animation)
+            if(swipeDistance > -60 && swipeDistance < 0)requestAnimationFrame(animation)
             setTimeout(() => {
                 throttle.current = true
             },150)
@@ -123,7 +117,6 @@ const Products = () => {
         }
     }
     const slideClicked = (i) => {
-        console.log('index of clicked', i)
         if(i == currentIndex.current +1){
             currentIndex.current++
             setPositionByIndex()
@@ -139,6 +132,7 @@ const Products = () => {
     })
     return (
     <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
+        <div ref={productSnap} className='absolute bottom-[100%] w-full h-[6vh]'></div>
         <h3 ref={productPageTitle} className=" text-7xl whitespace-nowrap ml-4 crab absolute top-0 font-[PlayfairDisplay] font-medium">Products</h3>
         <div ref={slideContainer} className="w-[100vw] lg:w-[auto] flex-grow">
             <div ref={slider} className='flex duration-500 h-full'>
