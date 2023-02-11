@@ -11,7 +11,7 @@ const productImages = [product1, product2, product3, product4, product5, product
 const SlideItem = ({obj, index, refFunction, touchStart, touchEnd, touchMove, mouseOver, canClick, cameFromLeft, left, productsDescription, productsPrices}) => {
   return (
     // image draggable = false onDragStart={(e) => e.preventDefault()}
-    <div ref={refFunction} className={`lg:w-[30vw] w-[100vw] flex-shrink-0 border-r border-black ${index == 0 && 'border-l border-black'} ${index == 5 && 'border-r border-black'}`} 
+    <div ref={refFunction} className={`lg:w-[30vw] ${index == 5 ? "w-[100vw]" : 'w-[85vw]'} flex-shrink-0 border-r border-black ${index == 0 && 'border-l border-black'} ${index == 5 && 'border-r border-black'}`} 
             onTouchStart={(e) => touchStart(e)} onTouchEnd={() => touchEnd()} onTouchMove={(e) => touchMove(e)} 
             onMouseOver={canClick ? mouseOver : undefined } onMouseEnter={() => left ? cameFromLeft.current = true : undefined } 
             onMouseLeave={() => left ? setTimeout(() => cameFromLeft.current = false, 200): undefined }>

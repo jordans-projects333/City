@@ -52,10 +52,9 @@ const Products = () => {
     // Swipe slider
     function animation() {
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
-        if(isDragging.current) requestAnimationFrame(animation)
     }
     const setPositionByIndex = () => {
-        currentTranslation.current = currentIndex.current * -window.innerWidth
+        currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
         prevTranslation.current = currentTranslation.current
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
     }
@@ -66,6 +65,9 @@ const Products = () => {
     }
     const touchMove = (e) => {
         currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
+        let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
+        console.log(swipeDistance)
+        if(swipeDistance > -50 && swipeDistance < 0)requestAnimationFrame(animation)
 
     }
     const touchEnd = () => {
@@ -102,7 +104,7 @@ const Products = () => {
             <div ref={slider} className='flex duration-500 h-full'>
            
                 {productTitles.map((object, i) => {
-                    if(i === 2)return <SlideItem obj={'pink'} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true} productsDescription={productsDescription} productsPrices={productPrices}/>
+                    if(i === 2)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideBack} canClick={true} cameFromLeft={cameFromLeft} left={true} productsDescription={productsDescription} productsPrices={productPrices}/>
                     if(i === 3)return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} mouseOver={slideForward} canClick={true} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
                     return <SlideItem obj={object} key={i} index={i} refFunction={addToSlideItems} touchStart={touchStart} touchEnd={touchEnd} touchMove={touchMove} canClick={false} left={false} productsDescription={productsDescription} productsPrices={productPrices}/>
                 })}
