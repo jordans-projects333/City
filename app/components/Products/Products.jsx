@@ -30,16 +30,20 @@ const Products = () => {
     let cameFromLeft = useRef(false)
     // Hover slider
     const slideForward = () => {
-        if(productPage.current.scrollLeft === 0 && cameFromLeft.current === true){
-            let scrollAmount = 0
-            const slideTimer = setInterval(function(){
-                productPage.current.scrollLeft += 15;
-                scrollAmount += 15
-                if(scrollAmount > window.innerWidth){
-                //   if(productPage.current.scrollLeft === (productPage.current.scrollWidth/2)){
-                    window.clearInterval(slideTimer);
+        try {
+            document.createEvent('TouchEvent')
+        } catch (error) {
+            if(productPage.current.scrollLeft === 0 && cameFromLeft.current === true){
+                let scrollAmount = 0
+                const slideTimer = setInterval(function(){
+                    productPage.current.scrollLeft += 15;
+                    scrollAmount += 15
+                    if(scrollAmount > window.innerWidth){
+                    //   if(productPage.current.scrollLeft === (productPage.current.scrollWidth/2)){
+                        window.clearInterval(slideTimer);
+                    }
+                }, 1);
                 }
-            }, 1);
             }
         }
     const slideBack = () => {
@@ -57,8 +61,13 @@ const Products = () => {
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
     }
     const setPositionByIndex = () => {
+        console.log('triggered')
+        console.log('index', currentIndex.current)
+        console.log('before', currentTranslation.current)
         currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
+        console.log('after', currentTranslation.current)
         prevTranslation.current = currentTranslation.current
+        console.log('prev', prevTranslation.current)
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
         productPageTitle.current.style.transitionDuration = '150ms'
         productPageTitle.current.style.opacity = 0
@@ -71,17 +80,17 @@ const Products = () => {
         }, 300)
     }
     const touchStart = (e) => {
-        isDragging.current = true
         startPos.current = e.touches[0].clientX
-        animationId.current = requestAnimationFrame(animation)
+        // console.log(4)
     }
     const touchMove = (e) => {
+        console.log('what2')
+        isDragging.current = true
         if(throttle.current){
             throttle.current = false
             currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
-            let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85)) / (window.innerWidth * .85)
-            console.log(swipeDistance)
-            if(swipeDistance > -0.35 && swipeDistance < 0)requestAnimationFrame(animation)
+            let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
+            if(swipeDistance > -80 && swipeDistance < 0)requestAnimationFrame(animation)
             setTimeout(() => {
                 throttle.current = true
             },150)
@@ -90,7 +99,6 @@ const Products = () => {
     }
     const touchEnd = () => {
         isDragging.current = false
-        cancelAnimationFrame(animationId.current)
         let movedBy = currentTranslation.current - prevTranslation.current
         if(movedBy < -15 && currentIndex.current < allSlideItems.current.length -1){
             currentIndex.current++
@@ -115,7 +123,8 @@ const Products = () => {
         }
     }
     const slideClicked = (i) => {
-        if(i != currentIndex.current){
+        console.log('index of clicked', i)
+        if(i == currentIndex.current +1){
             currentIndex.current++
             setPositionByIndex()
         }
