@@ -83,11 +83,11 @@ const Products = () => {
             cancelAnimationFrame(animationId.current)
         }
         // disable context menu on hold
-        // window.oncontextmenu = (e) => {
-        //     e.preventDefault()
-        //     e.stopPropagation()
-        //     return false
-        // }
+        window.oncontextmenu = (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            return false
+        }
     }, [isDragging.current])
     return (
     <div ref={productPage} className='lvh relative overflow-x-hidden lg:overflow-x-auto flex flex-col'>
