@@ -90,7 +90,7 @@ const Products = () => {
             throttle.current = false
             currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
             let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
-            if(swipeDistance > -80 && swipeDistance < 0)requestAnimationFrame(animation)
+            if(swipeDistance > -120 && swipeDistance < 0)requestAnimationFrame(animation)
             setTimeout(() => {
                 throttle.current = true
             },150)
@@ -100,10 +100,10 @@ const Products = () => {
     const touchEnd = () => {
         isDragging.current = false
         let movedBy = currentTranslation.current - prevTranslation.current
-        if(movedBy < -15 && currentIndex.current < allSlideItems.current.length -1){
+        if(movedBy < -5 && currentIndex.current < allSlideItems.current.length -1){
             currentIndex.current++
             setPositionByIndex()
-        }else if(movedBy > 15 && currentIndex.current > 0){
+        }else if(movedBy > 5 && currentIndex.current > 0){
             currentIndex.current--
             setPositionByIndex()
         }else{
