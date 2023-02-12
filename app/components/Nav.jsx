@@ -15,7 +15,7 @@ const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePag
     const navigateHome = () => {
         setHamburger((prev) => !prev)
         homePage.current.scrollIntoView()
-        homeSwipeLeft()
+        homeSwipeLeft({behavior: 'smooth'})
         
     }
     const navigateServices = () => {
@@ -24,12 +24,11 @@ const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePag
     }
     const navigateProducts = () => {
         setHamburger((prev) => !prev)
-        // productSnap.current.scrollIntoView({behavior: 'smooth'})
-        productSnap.current.scrollIntoView()
+        productSnap.current.scrollIntoView({behavior: 'smooth'})
     }
     const navigateGallery = () => {
         setHamburger((prev) => !prev)
-        homePage.current.scrollIntoView()
+        homePage.current.scrollIntoView({behavior: 'smooth'})
         homeSwipeRight()
     }
     const navigateContact = () => {
