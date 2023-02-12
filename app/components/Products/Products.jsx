@@ -13,7 +13,7 @@ const productsDescription = [
     'Beauty Works Anti-Yellow Shampoo 200ml, neutralises yellow & brassy tones to reduce the appearance of discolouration, whilst giving shine to dull hair. Beauty Works Anti Yellow Shampoo formula is 100% vegan friendly our natural ingredients deliver soft manageable hair.'
 ]
 
-const Products = ({productSnap}) => {
+const Products = ({productSnap, originalPosition, currentPosition}) => {
     let productPage = useRef(null)
     let throttle = useRef(true)
     let productPageTitle = useRef(null)
@@ -24,7 +24,6 @@ const Products = ({productSnap}) => {
     let isDragging = useRef(false)
     let currentTranslation = useRef(0)
     let prevTranslation = useRef(0)
-    let animationId = useRef(null)
     let currentIndex = useRef(0)
     let startPos = useRef(0)
     let cameFromLeft = useRef(false)
@@ -61,6 +60,7 @@ const Products = ({productSnap}) => {
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
     }
     const setPositionByIndex = () => {
+        console.log('eek')
         currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
         prevTranslation.current = currentTranslation.current
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
@@ -76,7 +76,8 @@ const Products = ({productSnap}) => {
     }
     const touchStart = (e) => {
         startPos.current = e.touches[0].clientX
-        // console.log(4)
+        originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
+        currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     }
     const touchMove = (e) => {
         isDragging.current = true
@@ -91,15 +92,22 @@ const Products = ({productSnap}) => {
         }
 
     }
+    const leftProduct = () => {
+        if(currentIndex.current != 0)currentIndex.current--
+        setPositionByIndex()
+    }
+    const rightProduct = () => {
+        if(currentIndex.current != 5)currentIndex.current++
+        setPositionByIndex()
+    }
     const touchEnd = () => {
         isDragging.current = false
-        let movedBy = currentTranslation.current - prevTranslation.current
-        if(movedBy < -5 && currentIndex.current < allSlideItems.current.length -1){
-            currentIndex.current++
-            setPositionByIndex()
-        }else if(movedBy > 5 && currentIndex.current > 0){
-            currentIndex.current--
-            setPositionByIndex()
+        if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return
+        let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
+        let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
+        let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
+        if(theta < 45 && lengthX > 40){
+            ((currentPosition.current[0] - originalPosition.current[0]) > 0) ? leftProduct() : rightProduct()
         }else{
             currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
             prevTranslation.current = currentTranslation.current
