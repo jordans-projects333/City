@@ -75,7 +75,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
         })
         const options = {
             root: null, // default, use viewport
-            rootMargin: '-30% 0px -60% 0%'
+            rootMargin: '-25% 0px -74% 0%'
           }
         const observer2 = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
