@@ -32,7 +32,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
         snapTime.current = true
         setTimeout(() => {
           snapTime.current = false
-        }, 300)
+        }, 200)
     }
     const swipeEnd = () => {
         if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return

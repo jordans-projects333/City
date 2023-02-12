@@ -15,7 +15,7 @@ const Home = ({imageWrapper, originalPosition, currentPosition, serviceSnap}) =>
     snapTime.current = true
     setTimeout(() => {
       snapTime.current = false
-    }, 300)
+    }, 200)
   }
   const homeSwipeRight = () => {
     let scrollAmount = 0

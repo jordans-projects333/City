@@ -14,6 +14,7 @@ const productsDescription = [
 ]
 
 const Products = ({productSnap, originalPosition, currentPosition}) => {
+    let disable = useRef(false)
     let productPage = useRef(null)
     let throttle = useRef(true)
     let productPageTitle = useRef(null)
@@ -60,13 +61,12 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
     }
     const setPositionByIndex = () => {
-        console.log('eek')
         currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
         prevTranslation.current = currentTranslation.current
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
         productPageTitle.current.style.transitionDuration = '150ms'
         productPageTitle.current.style.opacity = 0
-        if(currentIndex.current != 1 || currentIndex != 5)sliderIndex.current[currentIndex.current].style.opacity = 0
+        if(currentIndex.current != 0 || currentIndex.current != 5)sliderIndex.current[currentIndex.current].style.opacity = 0
         setTimeout(() => {
             sliderIndex.current[currentIndex.current].style.transitionDuration = '300ms'
             sliderIndex.current[currentIndex.current].style.opacity = 1
@@ -75,6 +75,7 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
         }, 300)
     }
     const touchStart = (e) => {
+        if(disable.current == true)return
         startPos.current = e.touches[0].clientX
         originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
         currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
@@ -85,7 +86,7 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
             throttle.current = false
             currentTranslation.current = prevTranslation.current + e.touches[0].clientX - startPos.current
             let swipeDistance = (currentTranslation.current + (window.innerWidth * currentIndex.current * .85))
-            if(swipeDistance > -60 && swipeDistance < 0)requestAnimationFrame(animation)
+            if(swipeDistance > -100 && swipeDistance < 0)requestAnimationFrame(animation)
             setTimeout(() => {
                 throttle.current = true
             },150)
@@ -126,6 +127,10 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
     }
     const slideClicked = (i) => {
         if(i == currentIndex.current +1){
+            disable.current = true
+            setTimeout(() => {
+                disable.current = false
+            }, 500)
             currentIndex.current++
             setPositionByIndex()
         }
