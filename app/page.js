@@ -41,7 +41,6 @@ export default function App() {
     }, 1);
   }
   const homeSwipeLeft = () => {
-    console.log('PIG')
     onGallery.current = false
     let homeslideTimer2 = setInterval(function(){
       homePage.current.scrollLeft -= 15;

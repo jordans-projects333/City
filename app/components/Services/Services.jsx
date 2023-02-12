@@ -22,6 +22,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
     let serviceImage2 = useRef(null)
     let serviceImage3 = useRef(null)
     let serviceImage4 = useRef(null)
+    let serviceText1 = useRef(null)
+    let serviceText2 = useRef(null)
+    let serviceText3 = useRef(null)
+    let serviceText4 = useRef(null)
     let serviceTabsWrapper = useRef(null)
     let showcase = useRef(null)
     let servicesPage = useRef(null)
@@ -69,10 +73,27 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
                 }
             })
         })
+        const options = {
+            root: null, // default, use viewport
+            rootMargin: '-30% 0px -60% 0%'
+          }
+        const observer2 = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if(entry.isIntersecting){
+                    entry.target.style.scale = 1.2
+                }else{
+                    entry.target.style.scale = 1
+                }
+            })
+        }, options)
         observer.observe(servicesPage.current)
+        observer2.observe(serviceText1.current)
+        observer2.observe(serviceText2.current)
+        observer2.observe(serviceText3.current)
+        observer2.observe(serviceText4.current)
     }, [servicesPage])
+    
     const showcaseIn = (e, treatments) => {
-        console.log(treatments)
         switch(treatments){
             case 'hair':
                 SetTreatents(<Hair/>)
@@ -122,10 +143,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
             <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments}/>
             <h3 className='text-4xl whitespace-nowrap ml-3 font-[300] crab leading-[3rem] pt-2 -z-20'>Services</h3>
                 <div ref={serviceTabsWrapper} className="flex flex-col flex-grow px-2 pb-2 gap-2 lg:flex-row lg:gap-8 lg:p-8 lg:pt-12">
-                    <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn} treatmentType={'hair'} title={'Hair'} number={12}/>
-                    <ServiceTab imageRef={serviceImage2} src={service_Image2} wrapperRef={serviceImageWrapper2} showcaseIn={showcaseIn} treatmentType={'face'} title={'Face'} number={9}/>
-                    <ServiceTab imageRef={serviceImage3} src={service_Image3} wrapperRef={serviceImageWrapper3} showcaseIn={showcaseIn} treatmentType={'nails'} title={'Nails'} number={23}/>
-                    <ServiceTab imageRef={serviceImage4} src={service_Image4} wrapperRef={serviceImageWrapper4} showcaseIn={showcaseIn} treatmentType={'body'} title={'Body'} number={4}/>
+                    <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn} treatmentType={'hair'} title={'Hair'} number={12} serviceText={serviceText1}/>
+                    <ServiceTab imageRef={serviceImage2} src={service_Image2} wrapperRef={serviceImageWrapper2} showcaseIn={showcaseIn} treatmentType={'face'} title={'Face'} number={9} serviceText={serviceText2}/>
+                    <ServiceTab imageRef={serviceImage3} src={service_Image3} wrapperRef={serviceImageWrapper3} showcaseIn={showcaseIn} treatmentType={'nails'} title={'Nails'} number={23} serviceText={serviceText3}/>
+                    <ServiceTab imageRef={serviceImage4} src={service_Image4} wrapperRef={serviceImageWrapper4} showcaseIn={showcaseIn} treatmentType={'body'} title={'Body'} number={4} serviceText={serviceText4}/>
                 </div>
             </div>
         </>
