@@ -26,7 +26,7 @@ const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePag
         setHamburger((prev) => !prev)
         setTimeout(() => {
             serviceClickable.current = true
-        }, 50)
+        }, 200)
     }
     const navigateServices = () => {
         exitNav()
@@ -47,7 +47,7 @@ const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePag
     }
     return (
          <nav className='ml-auto mb-4'>
-            <div onTouchStart={() => exitNav()} className={`fixed inset-0 h-[100lvh] duration-500 ${hamburger ? "bg-black/50" : "bg-transparent pointer-events-none"}`}></div>
+            <div onTouchEnd={() => exitNav()} className={`fixed inset-0 h-[100lvh] duration-500 ${hamburger ? "bg-black/50" : "bg-transparent pointer-events-none"}`}></div>
             <div className={`fixed pt-[6vh] left-[-200%] h-[100lvh] w-[55vw] bg-white top-0 duration-300 flex ${hamburger && "!left-0"}`}>
                 <ul className={`flex flex-col pl-4 text-3xl font-[${roboto.variable}] font-[300]`}>
                     <li><div className={`bg-black h-[1px] duration-300 ${!hamburger ? "w-0" : "w-[120%] delay-300"}`}></div></li>
