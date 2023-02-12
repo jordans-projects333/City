@@ -26,6 +26,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
     let serviceText2 = useRef(null)
     let serviceText3 = useRef(null)
     let serviceText4 = useRef(null)
+    let animating1 = useRef(false)
+    let animating2 = useRef(false)
+    let animating3 = useRef(false)
+    let animating4 = useRef(false)
     let serviceTabsWrapper = useRef(null)
     let showcase = useRef(null)
     let servicesPage = useRef(null)
@@ -49,13 +53,21 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
             productSnap.current.scrollIntoView({behavior: 'smooth'})
         }
       }
-    const textScale = (el, wrapper) => {
+    const textScale = (el, wrapper, animating) => {
         let wrapperPercent =  (wrapper.getBoundingClientRect().height / window.innerHeight)
         let percent = el.getBoundingClientRect().top / window.innerHeight
             if(percent >= 0.05 && percent <= .05 + wrapperPercent){
                 el.style.scale = 1.2
+                animating = true
+                setTimeout(() => {
+                    let wrapperPercent =  (wrapper.getBoundingClientRect().height / window.innerHeight)
+                    let percent = el.getBoundingClientRect().top / window.innerHeight
+                    animating = false
+                    if(percent <= 0.05 && percent >= .05 + wrapperPercent)el.style.scale = 1
+                })
+
              }else{
-                el.style.scale = 1
+                if(animating == false)el.style.scale = 1
              }
             setTimeout(function () {   
                 throttle.current = true;          
@@ -70,10 +82,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
                 serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
                 serviceImage4.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
             })
-            textScale(serviceText1.current, serviceImageWrapper1.current)
-            textScale(serviceText2.current, serviceImageWrapper1.current)
-            textScale(serviceText3.current, serviceImageWrapper1.current)
-            textScale(serviceText4.current, serviceImageWrapper1.current)
+            textScale(serviceText1.current, serviceImageWrapper1.current, animating1.current)
+            textScale(serviceText2.current, serviceImageWrapper1.current, animating2.current)
+            textScale(serviceText3.current, serviceImageWrapper1.current, animating3.current)
+            textScale(serviceText4.current, serviceImageWrapper1.current, animating4.current)
         }
     }
     useEffect(() => {
