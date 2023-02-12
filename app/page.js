@@ -15,6 +15,7 @@ export default function App() {
   let serviceSnap = useRef(null)
   let homePage = useRef(null)
   let onGallery = useRef(false)
+  let serviceClickable = useRef(true)
   const elementsStart = (e) => {
     originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
@@ -54,10 +55,10 @@ export default function App() {
   }
   return (
     <>
-      <Header hamburger={hamburger} setHamburger={setHamburger} productSnap={productSnap} serviceSnap={serviceSnap} homePage={homePage} homeSwipeRight={homeSwipeRight} homeSwipeLeft={homeSwipeLeft}/>
+      <Header hamburger={hamburger} setHamburger={setHamburger} productSnap={productSnap} serviceSnap={serviceSnap} homePage={homePage} homeSwipeRight={homeSwipeRight} homeSwipeLeft={homeSwipeLeft} serviceClickable={serviceClickable}/>
       <div ref={slider} className="relative top-0 left-0 overflow-x-hidden" onTouchStart={(e) => elementsStart(e)} onTouchMove={(e) => elementsMove(e)} onTouchEnd={() => elementsEnd()}>
         <Home imageWrapper={imageWrapper} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap} homePage={homePage} onGallery={onGallery} homeSwipeRight={homeSwipeRight} homeSwipeLeft={homeSwipeLeft}/>
-        <Services slider={slider} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap} productSnap={productSnap}/>
+        <Services slider={slider} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap} productSnap={productSnap} serviceClickable={serviceClickable}/>
         <Products originalPosition={originalPosition} currentPosition={currentPosition} productSnap={productSnap}/>
       </div>
     </>

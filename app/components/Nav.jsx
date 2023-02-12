@@ -9,35 +9,45 @@ const roboto = Montserrat({
 
 
 
-const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePage, homeSwipeLeft, homeSwipeRight}) => {
+const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePage, homeSwipeLeft, homeSwipeRight, serviceClickable}) => {
     let navPadding = useRef(0)
     if(header.current != null)navPadding.current = header.current.offsetHeight
     const navigateHome = () => {
-        setHamburger((prev) => !prev)
+        exitNav()
         homePage.current.scrollIntoView()
         homeSwipeLeft({behavior: 'smooth'})
         
     }
-    const navigateServices = () => {
+    const toggleNav = () => {
         setHamburger((prev) => !prev)
+        serviceClickable.current = !serviceClickable.current
+    }
+    const exitNav = () => {
+        setHamburger((prev) => !prev)
+        setTimeout(() => {
+            serviceClickable.current = true
+        }, 50)
+    }
+    const navigateServices = () => {
+        exitNav()
         serviceSnap.current.scrollIntoView({behavior: 'smooth'})
     }
     const navigateProducts = () => {
-        setHamburger((prev) => !prev)
+        exitNav()
         productSnap.current.scrollIntoView({behavior: 'smooth'})
     }
     const navigateGallery = () => {
-        setHamburger((prev) => !prev)
+        exitNav()
         homePage.current.scrollIntoView({behavior: 'smooth'})
         homeSwipeRight()
     }
     const navigateContact = () => {
-        setHamburger((prev) => !prev)
+        exitNav()
         productSnap.current.scrollIntoView({behavior: 'smooth'})
     }
     return (
          <nav className='ml-auto mb-4'>
-            <div onTouchStart={() => setHamburger((prev) => !prev)} className={`fixed inset-0 h-[100lvh] duration-500 ${hamburger ? "bg-black/50" : "bg-transparent pointer-events-none"}`}></div>
+            <div onTouchStart={() => exitNav()} className={`fixed inset-0 h-[100lvh] duration-500 ${hamburger ? "bg-black/50" : "bg-transparent pointer-events-none"}`}></div>
             <div className={`fixed pt-[6vh] left-[-200%] h-[100lvh] w-[55vw] bg-white top-0 duration-300 flex ${hamburger && "!left-0"}`}>
                 <ul className={`flex flex-col pl-4 text-3xl font-[${roboto.variable}] font-[300]`}>
                     <li><div className={`bg-black h-[1px] duration-300 ${!hamburger ? "w-0" : "w-[120%] delay-300"}`}></div></li>
@@ -48,7 +58,7 @@ const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePag
                     <li className={`mt-12 duration-700 ${hamburger ? "delay-[700ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateContact()}>Contact</li>
                 </ul>
             </div>
-            <div className='lg:hidden ml-auto h-[6vh] flex items-center px-6' onTouchStart={() => setHamburger((prev) => !prev)}>
+            <div className='lg:hidden ml-auto h-[6vh] flex items-center px-6' onTouchStart={() => toggleNav()}>
                 <div className="flex flex-col gap-[6px] ">
                     <div className={`w-[1.5rem] duration-300 h-[2px] ${hamburger ? "rotate-[45deg] translate-y-[8px] bg-white svgShadow" : 'bg-black'}`}></div>
                     <div className={`w-[1.5rem] duration-100 h-[2px] bg-black ${hamburger && "opacity-0"}`}></div>

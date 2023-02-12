@@ -11,7 +11,7 @@ import service_Image1 from '../../images/services_1.webp'
 import service_Image3 from '../../images/services_3.jpg'
 import service_Image4 from '../../images/services_4.jpg'
 
-const Services = ({slider, serviceSnap, currentPosition, originalPosition, productSnap}) => {
+const Services = ({slider, serviceSnap, currentPosition, originalPosition, productSnap, serviceClickable}) => {
     const [treatments, SetTreatents] = useState(null)
     let snapTime = useRef(false)
     let serviceImageWrapper1 = useRef(null)
@@ -58,16 +58,16 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
         let percent = el.getBoundingClientRect().top / window.innerHeight
             if(percent >= 0.05 && percent <= .05 + wrapperPercent){
                 el.style.scale = 1.2
-                animating = true
+                animating.current = true
                 setTimeout(() => {
                     let wrapperPercent =  (wrapper.getBoundingClientRect().height / window.innerHeight)
                     let percent = el.getBoundingClientRect().top / window.innerHeight
-                    animating = false
+                    animating.current = false
                     if(percent <= 0.05 && percent >= .05 + wrapperPercent)el.style.scale = 1
-                })
+                },700)
 
              }else{
-                if(animating == false)el.style.scale = 1
+                if(animating.current == false)el.style.scale = 1
              }
             setTimeout(function () {   
                 throttle.current = true;          
@@ -82,10 +82,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
                 serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
                 serviceImage4.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
             })
-            textScale(serviceText1.current, serviceImageWrapper1.current, animating1.current)
-            textScale(serviceText2.current, serviceImageWrapper1.current, animating2.current)
-            textScale(serviceText3.current, serviceImageWrapper1.current, animating3.current)
-            textScale(serviceText4.current, serviceImageWrapper1.current, animating4.current)
+            textScale(serviceText1.current, serviceImageWrapper1.current, animating1)
+            textScale(serviceText2.current, serviceImageWrapper1.current, animating2)
+            textScale(serviceText3.current, serviceImageWrapper1.current, animating3)
+            textScale(serviceText4.current, serviceImageWrapper1.current, animating4)
         }
     }
     useEffect(() => {
@@ -119,6 +119,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
     }, [servicesPage])
     
     const showcaseIn = (e, treatments) => {
+        if(!serviceClickable.current)return
         switch(treatments){
             case 'hair':
                 SetTreatents(<Hair/>)
@@ -163,7 +164,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
     return (
         <>
            
-            <div ref={servicesPage} className="lvh relative flex flex-col" onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
+            <div ref={servicesPage} className={`lvh relative flex flex-col`} onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
                 <div ref={serviceSnap} className="bottom-[100%] absolute w-full h-[6vh]"></div>
             <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments}/>
             <h3 className='text-4xl whitespace-nowrap ml-3 font-[300] crab leading-[3rem] pt-2 -z-20'>Services</h3>
