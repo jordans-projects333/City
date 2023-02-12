@@ -13,6 +13,8 @@ export default function App() {
   let currentPosition = useRef(null)
   let productSnap = useRef(null)
   let serviceSnap = useRef(null)
+  let homePage = useRef(null)
+  let onGallery = useRef(false)
   const elementsStart = (e) => {
     originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
@@ -27,14 +29,35 @@ export default function App() {
       })
     }
   }
+  const homeSwipeRight = () => {
+    let scrollAmount = 0
+    onGallery.current = true
+    const homeSlideTimer = setInterval(function(){
+        homePage.current.scrollLeft += 15;
+        scrollAmount += 15
+        if(scrollAmount > window.innerWidth){
+            window.clearInterval(homeSlideTimer);
+        }
+    }, 1);
+  }
+  const homeSwipeLeft = () => {
+    console.log('PIG')
+    onGallery.current = false
+    let homeslideTimer2 = setInterval(function(){
+      homePage.current.scrollLeft -= 15;
+      if(homePage.current.scrollLeft === 0){
+          window.clearInterval(homeslideTimer2);
+      }
+    }, 1);
+  }
   const elementsEnd = () => {
     imageWrapper.current.style.transform = `translateY(0px) translateX(-50%)`
   }
   return (
     <>
-      <Header hamburger={hamburger} setHamburger={setHamburger} productSnap={productSnap}/>
+      <Header hamburger={hamburger} setHamburger={setHamburger} productSnap={productSnap} serviceSnap={serviceSnap} homePage={homePage} homeSwipeRight={homeSwipeRight} homeSwipeLeft={homeSwipeLeft}/>
       <div ref={slider} className="relative top-0 left-0 overflow-x-hidden" onTouchStart={(e) => elementsStart(e)} onTouchMove={(e) => elementsMove(e)} onTouchEnd={() => elementsEnd()}>
-        <Home imageWrapper={imageWrapper} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap}/>
+        <Home imageWrapper={imageWrapper} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap} homePage={homePage} onGallery={onGallery} homeSwipeRight={homeSwipeRight} homeSwipeLeft={homeSwipeLeft}/>
         <Services slider={slider} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap} productSnap={productSnap}/>
         <Products originalPosition={originalPosition} currentPosition={currentPosition} productSnap={productSnap}/>
       </div>

@@ -5,10 +5,8 @@ import Gallery from "./Gallery"
 import Image from "next/image"
 import homeImage from '../../images/homeImage1.jpg'
 
-const Home = ({imageWrapper, originalPosition, currentPosition, serviceSnap}) => {
-  let homePage = useRef(null)
+const Home = ({imageWrapper, originalPosition, currentPosition, serviceSnap, homePage, onGallery, homeSwipeLeft, homeSwipeRight}) => {
   let snapTime = useRef(true)
-  let onGallery = useRef(false)
   const swipeStart = (e) => {
     originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
@@ -16,26 +14,6 @@ const Home = ({imageWrapper, originalPosition, currentPosition, serviceSnap}) =>
     setTimeout(() => {
       snapTime.current = false
     }, 200)
-  }
-  const homeSwipeRight = () => {
-    let scrollAmount = 0
-    onGallery.current = true
-    const homeSlideTimer = setInterval(function(){
-        homePage.current.scrollLeft += 15;
-        scrollAmount += 15
-        if(scrollAmount > window.innerWidth){
-            window.clearInterval(homeSlideTimer);
-        }
-    }, 1);
-  }
-  const homeSwipeLeft = () => {
-    onGallery.current = false
-    let homeslideTimer2 = setInterval(function(){
-      homePage.current.scrollLeft -= 15;
-      if(homePage.current.scrollLeft === 0){
-          window.clearInterval(homeslideTimer2);
-      }
-    }, 1);
   }
   const swipeEnd = () => {
     if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return

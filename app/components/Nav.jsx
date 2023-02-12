@@ -9,27 +9,32 @@ const roboto = Montserrat({
 
 
 
-const Nav = ({hamburger, setHamburger, header}) => {
+const Nav = ({hamburger, setHamburger, header, serviceSnap, productSnap, homePage, homeSwipeLeft, homeSwipeRight}) => {
     let navPadding = useRef(0)
     if(header.current != null)navPadding.current = header.current.offsetHeight
     const navigateHome = () => {
         setHamburger((prev) => !prev)
+        homePage.current.scrollIntoView()
+        homeSwipeLeft()
         
     }
     const navigateServices = () => {
         setHamburger((prev) => !prev)
+        serviceSnap.current.scrollIntoView({behavior: 'smooth'})
     }
     const navigateProducts = () => {
         setHamburger((prev) => !prev)
-        productSnap.current.scrollIntoView({behavior: 'smooth'})
-        // productSnap.current.scrollIntoView()
+        // productSnap.current.scrollIntoView({behavior: 'smooth'})
+        productSnap.current.scrollIntoView()
     }
     const navigateGallery = () => {
         setHamburger((prev) => !prev)
+        homePage.current.scrollIntoView()
+        homeSwipeRight()
     }
     const navigateContact = () => {
         setHamburger((prev) => !prev)
-        productSnap.current.scrollIntoView()
+        productSnap.current.scrollIntoView({behavior: 'smooth'})
     }
     return (
          <nav className='ml-auto mb-4'>

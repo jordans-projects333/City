@@ -5,7 +5,7 @@ import logo from '../images/logo.png'
 import Image from 'next/image'
 
 
-const Header = ({hamburger, setHamburger, productSnap}) => {
+const Header = ({hamburger, setHamburger, productSnap, serviceSnap, homePage, homeSwipeLeft, homeSwipeRight}) => {
     let header = useRef(null)
     return (
         <header ref={header} className='fixed z-50 flex h-[6vh] w-full nav__wrapper'>
@@ -13,7 +13,7 @@ const Header = ({hamburger, setHamburger, productSnap}) => {
                 <Image src={logo} alt="logo" fill/>
             </div>
             <h2 className={`pl-2 pt-4 pb-2 text-2xl bcrab font-solitreo logoShadow z-40`}>Pretty Little Salon</h2>
-            <Nav hamburger={hamburger} setHamburger={setHamburger} header={header} productSnap={productSnap}/>
+            <Nav hamburger={hamburger} setHamburger={setHamburger} header={header} productSnap={productSnap} serviceSnap={serviceSnap} homePage={homePage} homeSwipeRight={homeSwipeRight} homeSwipeLeft={homeSwipeLeft}/>
         </header>
     )
 }
