@@ -49,9 +49,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
             productSnap.current.scrollIntoView({behavior: 'smooth'})
         }
       }
-    const textScale = (el) => {
+    const textScale = (el, wrapper) => {
+        let wrapperPercent =  (wrapper.getBoundingClientRect().height / window.innerHeight)
         let percent = el.getBoundingClientRect().top / window.innerHeight
-            if(percent >= 0.05 && percent <= .4){
+            if(percent >= 0.05 && percent <= .05 + wrapperPercent){
                 el.style.scale = 1.2
              }else{
                 el.style.scale = 1
@@ -69,10 +70,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
                 serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
                 serviceImage4.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
             })
-            textScale(serviceText1.current)
-            textScale(serviceText2.current)
-            textScale(serviceText3.current)
-            textScale(serviceText4.current)
+            textScale(serviceText1.current, serviceImageWrapper1.current)
+            textScale(serviceText2.current, serviceImageWrapper1.current)
+            textScale(serviceText3.current, serviceImageWrapper1.current)
+            textScale(serviceText4.current, serviceImageWrapper1.current)
         }
     }
     useEffect(() => {
