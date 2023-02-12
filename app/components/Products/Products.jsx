@@ -28,6 +28,7 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
     let currentIndex = useRef(0)
     let startPos = useRef(0)
     let cameFromLeft = useRef(false)
+    let alreadyMoved = useRef(false)
     // Hover slider
     const slideForward = () => {
         try {
@@ -81,6 +82,7 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
         currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     }
     const touchMove = (e) => {
+        if(disable.current == true)return
         isDragging.current = true
         if(throttle.current){
             throttle.current = false
@@ -104,13 +106,17 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
         }
     }
     const rightProduct = () => {
-        if(currentIndex.current != 5){
-        currentIndex.current++
-        setPositionByIndex()
+        if(alreadyMoved){
+            alreadyMoved.current = false
         }else{
-            currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
-            prevTranslation.current = currentTranslation.current
-            slider.current.style.transform = `translateX(${currentTranslation.current}px)`
+            if(currentIndex.current != 5){
+                currentIndex.current++
+                setPositionByIndex()
+            }else{
+                currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
+                prevTranslation.current = currentTranslation.current
+                slider.current.style.transform = `translateX(${currentTranslation.current}px)`
+            }
         }
     }
     const touchEnd = () => {
@@ -138,6 +144,7 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
         }
     }
     const slideClicked = (i) => {
+        alreadyMoved.current = true
         if(i == currentIndex.current +1){
             disable.current = true
             setTimeout(() => {

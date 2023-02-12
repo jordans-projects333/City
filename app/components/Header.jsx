@@ -1,14 +1,14 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Nav from './Nav'
 import logo from '../images/logo.png'
 import Image from 'next/image'
 
 
-const Header = ({hamburger, setHamburger, productSnap, serviceSnap, homePage, homeSwipeLeft, homeSwipeRight, serviceClickable}) => {
+const Header = ({hamburger, setHamburger, productSnap, serviceSnap, homePage, homeSwipeLeft, homeSwipeRight, serviceClickable, onService}) => {
     let header = useRef(null)
     return (
-        <header ref={header} className='fixed z-50 flex h-[6vh] w-full nav__wrapper'>
+        <header ref={header} className={`fixed z-50 flex duration-500 h-[6vh] w-full nav__wrapper ${onService && '!bg-white'}`}>
             <div className='absolute bottom-0 ml-8 mb-1 left-0 h-[65%] aspect-square logo crab z-30'>
                 <Image src={logo} alt="logo" fill/>
             </div>

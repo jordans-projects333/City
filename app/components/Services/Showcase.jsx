@@ -1,8 +1,8 @@
 'use client'
 
-const Showcase = ({showcase, slider, serviceTabsWrapper, treatments}) => {
+const Showcase = ({showcase, slider, serviceTabsWrapper, treatments, setOnService}) => {
     const showcaseOut = () => {
-        console.log('egg rendered', treatments)
+        setOnService((prev) => !prev)
         try {
             document.createEvent('TouchEvent')
             requestAnimationFrame(() => {
@@ -28,7 +28,9 @@ const Showcase = ({showcase, slider, serviceTabsWrapper, treatments}) => {
     }
     return (
         <div ref={showcase} className="fixed left-[100%] top-[6vh] w-full h-[100vh] z-10 lg:absolute bg-white">
-            <div className="bg-green-500 w-full h-[4rem]" onClick={() => showcaseOut()}></div>
+            <div className="bg-black w-full text-white" onClick={() => showcaseOut()}>
+                back
+            </div>
             {treatments}
         </div>
     )

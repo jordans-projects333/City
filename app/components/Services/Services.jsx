@@ -11,7 +11,7 @@ import service_Image1 from '../../images/services_1.webp'
 import service_Image3 from '../../images/services_3.jpg'
 import service_Image4 from '../../images/services_4.jpg'
 
-const Services = ({slider, serviceSnap, currentPosition, originalPosition, productSnap, serviceClickable}) => {
+const Services = ({slider, serviceSnap, currentPosition, originalPosition, productSnap, serviceClickable, setOnService}) => {
     const [treatments, SetTreatents] = useState(null)
     let snapTime = useRef(false)
     let serviceImageWrapper1 = useRef(null)
@@ -120,6 +120,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
     
     const showcaseIn = (e, treatments) => {
         if(!serviceClickable.current)return
+        setOnService((prev) => !prev)
         switch(treatments){
             case 'hair':
                 SetTreatents(<Hair/>)
@@ -166,7 +167,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
            
             <div ref={servicesPage} className={`lvh relative flex flex-col`} onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
                 <div ref={serviceSnap} className="bottom-[100%] absolute w-full h-[6vh]"></div>
-            <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments}/>
+            <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments} setOnService={setOnService}/>
             <h3 className='text-4xl whitespace-nowrap ml-3 font-[300] crab leading-[3rem] pt-2 -z-20'>Services</h3>
                 <div ref={serviceTabsWrapper} className="flex flex-col flex-grow px-2 pb-2 gap-2 lg:flex-row lg:gap-8 lg:p-8 lg:pt-12">
                     <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn} treatmentType={'hair'} title={'Hair'} number={12} serviceText={serviceText1}/>
