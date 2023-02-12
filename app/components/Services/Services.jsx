@@ -49,6 +49,17 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
             productSnap.current.scrollIntoView({behavior: 'smooth'})
         }
       }
+    const textScale = (el) => {
+        let percent = el.getBoundingClientRect().top / window.innerHeight
+            if(percent >= 0.05 && percent <= .4){
+                el.style.scale = 1.2
+             }else{
+                el.style.scale = 1
+             }
+            setTimeout(function () {   
+                throttle.current = true;          
+            }, 100);
+    }
     const servicePageScroll = () => {
         if(throttle.current){
             throttle.current = false
@@ -58,9 +69,10 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
                 serviceImage3.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
                 serviceImage4.current.style.transform = `translate(-50%, ${-50 + (servicesPage.current.getBoundingClientRect().top/window.innerHeight * 23.5)}%)`
             })
-            setTimeout(function () {   
-                throttle.current = true;          
-            }, 100);
+            textScale(serviceText1.current)
+            textScale(serviceText2.current)
+            textScale(serviceText3.current)
+            textScale(serviceText4.current)
         }
     }
     useEffect(() => {
@@ -73,24 +85,24 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
                 }
             })
         })
-        const options = {
-            root: null, // default, use viewport
-            rootMargin: '-25% 0px -74% 0%'
-          }
-        const observer2 = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if(entry.isIntersecting){
-                    entry.target.style.scale = 1.2
-                }else{
-                    entry.target.style.scale = 1
-                }
-            })
-        }, options)
+        // const options = {
+        //     root: null, // default, use viewport
+        //     rootMargin: '-25% 0px -74% 0%'
+        //   }
+        // const observer2 = new IntersectionObserver((entries) => {
+        //     entries.forEach((entry) => {
+        //         if(entry.isIntersecting){
+        //             entry.target.style.scale = 1.2
+        //         }else{
+        //             entry.target.style.scale = 1
+        //         }
+        //     })
+        // }, options)
         observer.observe(servicesPage.current)
-        observer2.observe(serviceText1.current)
-        observer2.observe(serviceText2.current)
-        observer2.observe(serviceText3.current)
-        observer2.observe(serviceText4.current)
+        // observer2.observe(serviceText1.current)
+        // observer2.observe(serviceText2.current)
+        // observer2.observe(serviceText3.current)
+        // observer2.observe(serviceText4.current)
     }, [servicesPage])
     
     const showcaseIn = (e, treatments) => {
