@@ -14,19 +14,22 @@ const Nav = ({hamburger, setHamburger, header}) => {
     if(header.current != null)navPadding.current = header.current.offsetHeight
     const navigateHome = () => {
         setHamburger((prev) => !prev)
-        console.log('home')
+        
     }
     const navigateServices = () => {
         setHamburger((prev) => !prev)
     }
     const navigateProducts = () => {
         setHamburger((prev) => !prev)
+        productSnap.current.scrollIntoView({behavior: 'smooth'})
+        // productSnap.current.scrollIntoView()
     }
     const navigateGallery = () => {
         setHamburger((prev) => !prev)
     }
     const navigateContact = () => {
         setHamburger((prev) => !prev)
+        productSnap.current.scrollIntoView()
     }
     return (
          <nav className='ml-auto mb-4'>
@@ -35,10 +38,10 @@ const Nav = ({hamburger, setHamburger, header}) => {
                 <ul className={`flex flex-col pl-4 text-3xl font-[${roboto.variable}] font-[300]`}>
                     <li><div className={`bg-black h-[1px] duration-300 ${!hamburger ? "w-0" : "w-[120%] delay-300"}`}></div></li>
                     <li className={`mt-4 duration-700 ${hamburger ? "delay-[300ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateHome()}>Home</li>
-                    <li className={`mt-16 duration-700 ${hamburger ? " delay-[400ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateGallery()}>Gallery</li>
-                    <li className={`mt-16 duration-700 ${hamburger ? "delay-[500ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateServices()}>Services</li>
-                    <li className={`mt-16 duration-700 ${hamburger ? "delay-[600ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateProducts()}>Products</li>
-                    <li className={`mt-16 duration-700 ${hamburger ? "delay-[700ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateContact()}>Contact</li>
+                    <li className={`mt-12 duration-700 ${hamburger ? " delay-[400ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateGallery()}>Gallery</li>
+                    <li className={`mt-12 duration-700 ${hamburger ? "delay-[500ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateServices()}>Services</li>
+                    <li className={`mt-12 duration-700 ${hamburger ? "delay-[600ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateProducts()}>Products</li>
+                    <li className={`mt-12 duration-700 ${hamburger ? "delay-[700ms] opacity-1" : "opacity-0"}`} onTouchStart={() => navigateContact()}>Contact</li>
                 </ul>
             </div>
             <div className='lg:hidden ml-auto h-[6vh] flex items-center px-6' onTouchStart={() => setHamburger((prev) => !prev)}>

@@ -66,7 +66,7 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
         slider.current.style.transform = `translateX(${currentTranslation.current}px)`
         productPageTitle.current.style.transitionDuration = '150ms'
         productPageTitle.current.style.opacity = 0
-        if(currentIndex.current != 0 || currentIndex.current != 5)sliderIndex.current[currentIndex.current].style.opacity = 0
+        sliderIndex.current[currentIndex.current].style.opacity = 0
         setTimeout(() => {
             sliderIndex.current[currentIndex.current].style.transitionDuration = '300ms'
             sliderIndex.current[currentIndex.current].style.opacity = 1
@@ -94,12 +94,24 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
 
     }
     const leftProduct = () => {
-        if(currentIndex.current != 0)currentIndex.current--
-        setPositionByIndex()
+        if(currentIndex.current != 0){
+            currentIndex.current--
+            setPositionByIndex()
+        }else{
+            currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
+            prevTranslation.current = currentTranslation.current
+            slider.current.style.transform = `translateX(${currentTranslation.current}px)`
+        }
     }
     const rightProduct = () => {
-        if(currentIndex.current != 5)currentIndex.current++
+        if(currentIndex.current != 5){
+        currentIndex.current++
         setPositionByIndex()
+        }else{
+            currentTranslation.current = currentIndex.current * -window.innerWidth * 0.85
+            prevTranslation.current = currentTranslation.current
+            slider.current.style.transform = `translateX(${currentTranslation.current}px)`
+        }
     }
     const touchEnd = () => {
         isDragging.current = false

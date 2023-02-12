@@ -5,15 +5,15 @@ import logo from '../images/logo.png'
 import Image from 'next/image'
 
 
-const Header = ({hamburger, setHamburger}) => {
+const Header = ({hamburger, setHamburger, productSnap}) => {
     let header = useRef(null)
     return (
         <header ref={header} className='fixed z-50 flex h-[6vh] w-full nav__wrapper'>
-            <div className='absolute bottom-0 ml-8 mb-1 left-0 h-[65%] aspect-square logo crab z-50'>
+            <div className='absolute bottom-0 ml-8 mb-1 left-0 h-[65%] aspect-square logo crab z-30'>
                 <Image src={logo} alt="logo" fill/>
             </div>
-            <h2 className={`pl-2 pt-4 pb-2 text-2xl bcrab font-solitreo logoShadow z-40 ${hamburger && "flash"}`}>Pretty Little Salon</h2>
-            <Nav hamburger={hamburger} setHamburger={setHamburger} header={header}/>
+            <h2 className={`pl-2 pt-4 pb-2 text-2xl bcrab font-solitreo logoShadow z-40`}>Pretty Little Salon</h2>
+            <Nav hamburger={hamburger} setHamburger={setHamburger} header={header} productSnap={productSnap}/>
         </header>
     )
 }

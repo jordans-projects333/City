@@ -32,7 +32,7 @@ export default function App() {
   }
   return (
     <>
-      <Header hamburger={hamburger} setHamburger={setHamburger}/>
+      <Header hamburger={hamburger} setHamburger={setHamburger} productSnap={productSnap}/>
       <div ref={slider} className="relative top-0 left-0 overflow-x-hidden" onTouchStart={(e) => elementsStart(e)} onTouchMove={(e) => elementsMove(e)} onTouchEnd={() => elementsEnd()}>
         <Home imageWrapper={imageWrapper} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap}/>
         <Services slider={slider} originalPosition={originalPosition} currentPosition={currentPosition} serviceSnap={serviceSnap} productSnap={productSnap}/>
