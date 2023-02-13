@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import hairImage from '../../images/services_1.webp'
 import Image from 'next/image'
 import Socials from '../Home/Socials'
 
 const Hair = () => {
+    const [buttonAnimating, setButtonAnimating] = useState(false)
+    const buttonClicked = () => {
+        console.log('clicked')
+        if(buttonAnimating)return
+        setButtonAnimating(true)
+        setTimeout(() => {
+            setButtonAnimating(false)
+        }, 500)
+    }
   return (
     <div>
         <div className='w-full h-[30vh] relative -z-20 overflow-hidden'>
@@ -96,7 +105,7 @@ const Hair = () => {
                         <h3>yo cut</h3>
                         <h3>£12.00</h3>
                     </div>
-                    <div className='w-full flex justify-center pb-[calc(5rem)] pt-4'><h4 className='border border-black py-2 px-4 font-semibold tracking-wider text-lg'>Book appoinment</h4></div>
+                    <div className={`w-full flex justify-center pb-[calc(5rem)] pt-4 ${buttonAnimating && 'buttonClick'}`} onTouchStart={() => buttonClicked()}><h4 className='border border-black py-2 px-4 font-semibold tracking-wider text-lg'>Book appoinment</h4></div>
                 </div>
                 <Socials/>
             </div>

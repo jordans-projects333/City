@@ -97,3 +97,17 @@ p{
 .zoom{
   animation: zoom 30s linear infinite;
 }
+@keyframes buttonClick {
+  0%{
+    scale: 1;
+  }
+  50%{
+    scale: 0.85;
+  }
+  100%{
+    scale: 1
+  }
+}
+.buttonClick{
+  animation: buttonClick .5s linear forwards;
+}

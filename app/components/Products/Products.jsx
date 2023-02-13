@@ -120,7 +120,6 @@ const Products = ({productSnap, originalPosition, currentPosition}) => {
         }
     }
     const touchEnd = () => {
-        console.log('hhj')
         isDragging.current = false
         if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return
         let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])

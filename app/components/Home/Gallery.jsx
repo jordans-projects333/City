@@ -47,13 +47,13 @@ const Gallery = ({homeSwipeLeft}) => {
     }
   return (
     <div className='flex-shrink-0 flex flex-col relative'>
-        <div className='mt-[6vh] w-full bg-white flex items-center justify-center gap-2 pr-4 py-1 border-t border-black' onTouchStart={() => homeSwipeLeft()}>
-            <svg className='h-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        <div className='mt-[6vh] w-full bg-black text-white flex items-center justify-center gap-2 pr-4 py-1 border-t border-black' onTouchStart={() => homeSwipeLeft()}>
+            <svg className='h-4 fill-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
             <h3 className='font-semibold tracking-wider text-lg'>Leave Gallery</h3>
         </div>
         <div className='flex w-[100vw] flex-grow lg:w-[60vw] relative lg:overflow-y-hidden overflow-y-auto  flex-col' onClick={() => homeIntro()}>
             <div className='flex lg:gap-1 px-1 flex-shrink-0 w-full flex-col lg:flex-row h-[100%]'>
-                <div ref={gallerySlide1} className='pt-1 flex-1 flex lg:flex-col gap-1 relative duration-[1.2s] top-0 lg:h-auto h-[30vh]'>
+                <div ref={gallerySlide1} className='flex-1 flex lg:flex-col gap-1 relative duration-[1.2s] top-0 lg:h-auto h-[30vh]'>
                     <div className='lg:h-[60%] lg:w-auto h-full w-full relative'><Image src={gallery1} alt="brb" fill/></div>
                     <div className='lg:h-[40%] lg:w-auto h-full w-full relative'><Image src={gallery2} alt="brb" fill/></div>
                 </div>

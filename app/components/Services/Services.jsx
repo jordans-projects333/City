@@ -120,6 +120,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
     
     const showcaseIn = (e, treatments) => {
         if(!serviceClickable.current)return
+        serviceClickable.current = false
         setOnService((prev) => !prev)
         switch(treatments){
             case 'hair':
@@ -167,7 +168,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
            
             <div ref={servicesPage} className={`lvh relative flex flex-col`} onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
                 <div ref={serviceSnap} className="bottom-[100%] absolute w-full h-[6vh]"></div>
-            <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments} setOnService={setOnService}/>
+            <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments} setOnService={setOnService} serviceClickable={serviceClickable}/>
             <h3 className='text-3xl whitespace-nowrap font-[500] leading-[3rem] py-2 -z-20 w-full text-center'>Services</h3>
                 <div ref={serviceTabsWrapper} className="flex flex-col flex-grow px-2 pb-2 gap-2 lg:flex-row lg:gap-8 lg:p-8 lg:pt-12">
                     <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn} treatmentType={'hair'} title={'Hair'} number={12} serviceText={serviceText1}/>
