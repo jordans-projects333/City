@@ -76,3 +76,24 @@ footer{
 p{
   white-space: pre-wrap;
 }
+
+@keyframes zoom {
+  0%{
+    scale: 1.2;
+  }
+  25%{
+    scale: 1;
+  }
+  50%{
+    scale: 1.2;
+  }
+  75%{
+    scale: 1;
+  }
+  100%{
+    scale: 1.2;
+  }
+}
+.zoom{
+  animation: zoom 30s linear infinite;
+}

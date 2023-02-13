@@ -27,7 +27,7 @@ const Showcase = ({showcase, slider, serviceTabsWrapper, treatments, setOnServic
         }
     }
     return (
-        <div ref={showcase} className="fixed left-[100%] top-[6vh] w-full h-[100vh] z-10 lg:absolute bg-white flex flex-col">
+        <div ref={showcase} className="fixed left-[100%] top-0 pt-[6vh] w-full h-[100vh] z-10 lg:absolute bg-white flex flex-col">
             <div className='service w-full bg-black border-white text-white flex items-center justify-center gap-2 pr-4 py-1' onTouchStart={() => showcaseOut()}>
                 <svg className='h-4 fill-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
                 <h3 className='font-semibold tracking-wider text-lg'>Back</h3>

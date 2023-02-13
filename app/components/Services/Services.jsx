@@ -141,8 +141,8 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
             document.createEvent('TouchEvent')
             requestAnimationFrame(() => {
                 showcase.current.style.left = 0
-                showcase.current.style.transitionDuration = '600ms'
-                slider.current.style.transitionDuration = '800ms'
+                showcase.current.style.transitionDuration = '500ms'
+                slider.current.style.transitionDuration = '500ms'
                 slider.current.style.left = '-100%'
             })
         } catch (error) {
