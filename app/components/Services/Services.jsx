@@ -168,7 +168,7 @@ const Services = ({slider, serviceSnap, currentPosition, originalPosition, produ
             <div ref={servicesPage} className={`lvh relative flex flex-col`} onTouchStart={(e) => swipeStart(e)} onTouchEnd={() => swipeEnd()}>
                 <div ref={serviceSnap} className="bottom-[100%] absolute w-full h-[6vh]"></div>
             <Showcase showcase={showcase} slider={slider} serviceTabsWrapper={serviceTabsWrapper} treatments={treatments} setOnService={setOnService}/>
-            <h3 className='text-4xl whitespace-nowrap ml-3 font-[300] crab leading-[3rem] pt-2 -z-20'>Services</h3>
+            <h3 className='text-3xl whitespace-nowrap font-[500] leading-[3rem] py-2 -z-20 w-full text-center'>Services</h3>
                 <div ref={serviceTabsWrapper} className="flex flex-col flex-grow px-2 pb-2 gap-2 lg:flex-row lg:gap-8 lg:p-8 lg:pt-12">
                     <ServiceTab imageRef={serviceImage1} src={service_Image1} wrapperRef={serviceImageWrapper1} showcaseIn={showcaseIn} treatmentType={'hair'} title={'Hair'} number={12} serviceText={serviceText1}/>
                     <ServiceTab imageRef={serviceImage2} src={service_Image2} wrapperRef={serviceImageWrapper2} showcaseIn={showcaseIn} treatmentType={'face'} title={'Face'} number={9} serviceText={serviceText2}/>
