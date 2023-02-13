@@ -69,6 +69,10 @@
 footer{
   box-shadow: 0px -3px 5px rgba(0,0,0,0.3);
 }
+.service{
+  box-shadow: 0px -10px 50px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
 p{
   white-space: pre-wrap;
 }
